@@ -47,3 +47,7 @@
 ; wind move -- use shift + arrows to change windows
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
+
+
+; just spaces
+(setq-default indent-tabs-mode nil)
