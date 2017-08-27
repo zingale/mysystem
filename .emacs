@@ -19,6 +19,9 @@
 (put 'downcase-region 'disabled nil)
 
 
+; whitespace
+(add-hook 'python-mode-hook (setq-default show-trailing-whitespace t))
+
 ; line truncation
 (global-set-key (kbd "<f6>") 'toggle-truncate-lines)
 
