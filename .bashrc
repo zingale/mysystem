@@ -83,7 +83,7 @@ if [ -e /usr/local/hypre ]; then
 fi
 
 hostname=`uname -n`
-if [ $hostname -eq bender.astro.sunysb.edu ]; then
+if [ $hostname == "bender.astro.sunysb.edu" ]; then
     # PGI
     export PGI=/opt/pgi;
     export PATH=/opt/pgi/linux86-64/17.7/bin:$PATH;
