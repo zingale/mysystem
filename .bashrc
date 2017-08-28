@@ -6,6 +6,11 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
+
+if [ -e ~/bin ]; then
+    export PATH=".:~/bin:$PATH"
+fi
+
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -14,27 +19,35 @@ alias ssh='ssh -Y'
 
 alias ipython='ipython3'
 
+# SVN
 export SVN_EDITOR=vi
 
 
-# MPI/gfortran 
+# MPI/gfortran stuff
 export GFORTRAN_UNBUFFERED_ALL=1
 
 # BoxLib python
-export PYTHONPATH="/home/zingale/development/AmrPostprocessing/python"
+if [ -e /usr/local/BoxLib ]; then
+    export PYTHONPATH=/usr/local/BoxLib
+    export PATH=/usr/local/BoxLib:$PATH
+fi
+export PYTHONPATH=/home/zingale/development/AmrPostprocessing/python:/home/zingale/development/AMReX/Tools/RegressionTesting:$PYTHONPATH
 export PATH=/home/zingale/development/AmrPostprocessing/python:$PATH
 
-# Microphysics / Maestro
-export MICROPHYSICS_HOME="/home/zingale/development/Microphysics"
-export MAESTRO_HOME="/home/zingale/development/MAESTRO"
+# Microphysics
+export MICROPHYSICS_HOME=/home/zingale/development/Microphysics
+
+# Maestro
+export MAESTRO_HOME=/home/zingale/development/MAESTRO
 
 # AMReX / BoxLib
-export BOXLIB_HOME="/home/zingale/development/BoxLib/"
+export BOXLIB_HOME=/home/zingale/development/BoxLib/
 export BOXLIB_USE_MPI_WRAPPERS=1
-export AMREX_HOME="/home/zingale/development/AMReX/"
+export AMREX_HOME=/home/zingale/development/AMReX/
 
-# Castro
-export CASTRO_HOME="/home/zingale/development/Castro"
+# Castro stuff
+export CASTRO_HOME=/home/zingale/development/Castro
+export WDMERGER_HOME=/home/zingale/development/wdmerger
 
 # plotting numerical exercises
 export PYTHONPATH="$PYTHONPATH:/home/zingale/classes/numerical_exercises/:/home/zingale/development/pyro2/:/home/zingale/classes/astro_animations"
@@ -43,7 +56,7 @@ export PYTHONPATH="$PYTHONPATH:/home/zingale/classes/numerical_exercises/:/home/
 #export PATH="/usr/local/visit/bin:${PATH}"
 
 # pyro
-export PYRO_HOME="/home/zingale/development/pyro2/"
+export PYRO_HOME=/home/zingale/development/pyro2/
 
 # pyreaclib
 export PYTHONPATH="$PYTHONPATH:/home/zingale/development/pyreaclib"
@@ -67,4 +80,17 @@ fi
 
 if [ -e /usr/local/hypre ]; then
     export HYPRE_DIR=/usr/local/hypre
+fi
+
+hostname=`uname -n`
+if [ $hostname -eq bender.astro.sunysb.edu ]; then
+    # PGI
+    export PGI=/opt/pgi;
+    export PATH=/opt/pgi/linux86-64/17.7/bin:$PATH;
+    export MANPATH=$MANPATH:/opt/pgi/linux86-64/17.7/man;
+    export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat; 
+
+    # CUDA
+    export CUDA_PATH=/usr/local/cuda-8.0
+    export PATH=$CUDA_PATH/bin:$PATH
 fi
