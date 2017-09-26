@@ -82,6 +82,9 @@ if [ -e /usr/local/hypre ]; then
     export HYPRE_DIR=/usr/local/hypre
 fi
 
+# pick up .local first
+export PATH=~/.local/bin:${PATH}
+
 hostname=`uname -n`
 if [ $hostname == "bender.astro.sunysb.edu" ]; then
     # PGI
