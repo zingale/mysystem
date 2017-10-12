@@ -1,0 +1,10 @@
+
+[user]
+        name = Michael Zingale
+	email = michael.zingale@stonybrook.edu
+
+[alias]
+        # this lets me get a PR as
+        # git fetch-pr 7
+        # then "git checkout pr-7
+        fetch-pr =!sh -c 'git fetch origin +pull/$1/head:pr-$1' fetch-pr
