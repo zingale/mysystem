@@ -94,7 +94,7 @@ if [ $hostname == "bender.astro.sunysb.edu" ]; then
     export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat; 
 
     # CUDA
-    export CUDA_PATH=/usr/local/cuda-9.0
+    export CUDA_PATH=/usr/local/cuda-9.1
     export PATH=$CUDA_PATH/bin:$PATH
 fi
 
@@ -106,6 +106,6 @@ if [ $hostname == "groot.astro.sunysb.edu" ]; then
     export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat; 
 
     # CUDA
-    export CUDA_PATH=/usr/local/cuda-9.0
+    export CUDA_PATH=/usr/local/cuda-9.1
     export PATH=$CUDA_PATH/bin:$PATH
 fi
