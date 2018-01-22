@@ -71,33 +71,60 @@ fail2ban-client set sshd unbanip <IP>
 
 ## python
 
-dnf install python3-scipy openssl-devel
-dnf install ipython3 python3-matplotlib python3-f2py 
-python3-Cython python3-sympy python3-h5py
+Install core packages via `dnf`, install rapidly changing/specialty ones through
+pip.
 
-pip3 install pytest --user
+```
+dnf install python3-scipy ipython3 python3-matplotlib python3-sympy 
+dnf install python3-f2py python3-Cython python3-h5py
+dnf install python3-pylint python3-pyflakes
+```
 
+```
 pip3 install jupyter --user
+```
+
+Needed for development:
+```
+dnf install openssl-devel
+```
+
+Testing infrastructure:
+```
+pip3 install pytest --user
+```
+
+Sphinx infrastructure:
+```
 pip3 install nbsphinx --user
 pip3 install numpydoc --user
 pip3 install sphinx_rtd_theme --user
 
 dnf install pandoc
+```
 
-dnf install python3-pylint python3-pyflakes
 
 ## LaTeX
 
+First line gets most of what is needed.  The remaining packages are used
+by some of my docs:
+```
 dnf install texlive texlive-collection-latex texlive-collection-fontsrecommended texlive-collection-latexextra
+dnf install texlive-epstopdf*
 
 dnf install 'tex(raleway.sty)'
 dnf install 'tex(ly1enc.def)'
 dnf install 'tex(inconsolata.sty)'
 dnf install 'tex(cantarell.sty)'
 dnf install texlive-revtex
- gv enscript
+```
 
-dnf install texlive-epstopdf*
+Also useful for publishing:
+```
+dnf install gv enscript
+```
+
+
 
 
 ## Developing
