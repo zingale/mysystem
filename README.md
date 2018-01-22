@@ -121,59 +121,72 @@ dnf install texlive-revtex
 
 Also useful for publishing:
 ```
-dnf install gv enscript
+dnf install gv enscript netpbm-progs
 ```
-
-
 
 
 ## Developing
 
+```
 dnf install gcc-gfortran gcc-c++
-xxdiff
 dnf install valgrind
-dnf install screen
- mpich mpich-devel mpich-autoload
+```
+
+Useful tools:
+```
+dnf install screen xxdiff ack 
+```
+
+MPI:
+```
+dnf install  mpich mpich-devel mpich-autoload
+```
 
 
+## Other Useful Packages
 
-
+```
 dnf install stellarium gnuplot
-ack gthumb
-dnf install motif motif-devel levien-inconsolata-fonts
+
+dnf install motif motif-devel
 dnf install libXpm-devel
-dnf install lyx-fonts gnome-tweak-tool 
-
-dnf install inkscape levien-inconsolata-fonts
-
-----
-
+dnf install lyx-fonts
+dnf install revelation
+```
 
 
 ## GNOME
 
-gnome:
+```
+dnf install gnome-tweak-tool levien-inconsolata-fonts
+```
 
- -- system-settings -> keyboard -> shortcuts, assign F1 to launch terminal
+terminal shortcut:  system-settings -> keyboard -> shortcuts, assign F1 to launch terminal
 
- -- gnome-tweak-tool:
+Run `gnome-tweak-tool`:
 
-    * extensions: turn on window list
-    * fonts:
-        - hinting: full
-	- antialiasing: subpixel
-    * topbar: turn on date
-    * windows:
-        - focus is secondary click
-	- turn on maximize and minimize
+* extensions: turn on window list
+
+* fonts:
+  * hinting: full
+  * antialiasing: subpixel
+  * set monospace font to Inconsolata
+
+* topbar: turn on date
+
+* windows:
+  * focus is secondary click
+  * turn on maximize and minimize
 
 
-turn off maximize when windows hit top of screen
+### turn off maximize when windows hit top of screen
 
+```
 dnf install dconf-editor
+```
 
-dconf-editor
-set org.gnome.shell.overrides.edge-tiling to disabled
+Run `dconf-editor` and
+set `org.gnome.shell.overrides.edge-tiling` to `disabled`
 
 
 ## Multimedia
@@ -181,33 +194,32 @@ set org.gnome.shell.overrides.edge-tiling to disabled
 
 ### MS Core Fonts:
 
-http://mscorefonts2.sourceforge.net/
+based on http://mscorefonts2.sourceforge.net/
 
+```
 dnf install curl cabextract xorg-x11-font-utils fontconfig
 rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+```
 
 ### Movies
 
+```
 dnf install mplayer mencoder gstreamer-plugins-{good,bad,ugly} gstreamer-ffmpeg gstreamer1-libav ffmpeg
+```
+
+### Images
+
+```
+dnf install inkscape gthumb
+```
 
 
-----
+## Communication
 
-
-dnf install openssl-devel ack netpbm-progs gthumb revelation
-
-----
-
-printer via dialog
-
-----
-
-
-
-
-
-----
+### Slack:
 
 download slack: https://slack.com/downloads/linux
+```
 dnf install slack-3.0.5-0.1.fc21.x86_64.rpm
+```
 
