@@ -58,8 +58,8 @@ export PYTHONPATH="$PYTHONPATH:/home/zingale/classes/numerical_exercises/:/home/
 # pyro
 export PYRO_HOME=/home/zingale/development/pyro2/
 
-# pyreaclib
-export PYTHONPATH="$PYTHONPATH:/home/zingale/development/pyreaclib"
+# pynucastro
+export PYTHONPATH="$PYTHONPATH:/home/zingale/development/pynucastro"
 
 # prompt -- this gets the git branch in the prompt
 # we also use some coloring.  Note that we need to put the 
