@@ -149,7 +149,7 @@ dnf install  mpich mpich-devel mpich-autoload
 dnf install stellarium gnuplot
 
 dnf install motif motif-devel
-dnf install libXpm-devel
+dnf install libXpm libXpm-devel
 dnf install lyx-fonts
 dnf install revelation
 ```
