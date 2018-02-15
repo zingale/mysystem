@@ -75,7 +75,7 @@ Install core packages via `dnf`, install rapidly changing/specialty ones through
 pip.
 
 ```
-dnf install python3-scipy ipython3 python3-matplotlib python3-sympy 
+dnf install python3-scipy ipython3 python3-matplotlib python3-sympy
 dnf install python3-f2py python3-Cython python3-h5py
 dnf install python3-pylint python3-pyflakes
 ```
@@ -134,7 +134,7 @@ dnf install valgrind
 
 Useful tools:
 ```
-dnf install screen xxdiff ack 
+dnf install screen xxdiff ack
 ```
 
 MPI:
@@ -223,3 +223,28 @@ download slack: https://slack.com/downloads/linux
 dnf install slack-3.0.5-0.1.fc21.x86_64.rpm
 ```
 
+## Nvidia
+
+### Wayland:
+
+need to remove disable wayland in gdm:
+
+  * edit `/etc/gdm/custom.conf`
+
+  * uncomment: `WaylandEnable=False`
+
+
+### Drivers
+
+Do:
+```
+dnf install akmod-nvidia
+```
+
+Make sure it is pulling from rpmfusion.
+
+
+### CUDA
+
+Important, don't get the Xorg stuff from the Nvidia repo -- continue
+getting it from rpmfusion.  Just get CUDA from Nvidia.
