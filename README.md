@@ -210,7 +210,7 @@ dnf install mplayer mencoder gstreamer-plugins-{good,bad,ugly} gstreamer-ffmpeg 
 ### Images
 
 ```
-dnf install inkscape gthumb
+dnf install inkscape gthumb gimp
 ```
 
 
