@@ -31,7 +31,7 @@ if [ -e /usr/local/BoxLib ]; then
     export PYTHONPATH=/usr/local/BoxLib
     export PATH=/usr/local/BoxLib:$PATH
 fi
-export PYTHONPATH=/home/zingale/development/AmrPostprocessing/python:/home/zingale/development/AMReX/Tools/RegressionTesting:$PYTHONPATH
+export PYTHONPATH=/home/zingale/development/AmrPostprocessing/python:$PYTHONPATH
 export PATH=/home/zingale/development/AmrPostprocessing/python:$PATH
 
 # Microphysics
@@ -43,7 +43,11 @@ export MAESTRO_HOME=/home/zingale/development/MAESTRO
 # AMReX / BoxLib
 export BOXLIB_HOME=/home/zingale/development/BoxLib/
 export BOXLIB_USE_MPI_WRAPPERS=1
-export AMREX_HOME=/home/zingale/development/AMReX/
+if [ -e /home/zingale/development/AMReX/ ]; then
+    export AMREX_HOME=/home/zingale/development/AMReX/
+else
+    export AMREX_HOME=/home/zingale/development/amrex/
+fi
 
 # Castro stuff
 export CASTRO_HOME=/home/zingale/development/Castro
@@ -58,8 +62,8 @@ export PYTHONPATH="$PYTHONPATH:/home/zingale/classes/numerical_exercises/:/home/
 # pyro
 export PYRO_HOME=/home/zingale/development/pyro2/
 
-# pyreaclib
-export PYTHONPATH="$PYTHONPATH:/home/zingale/development/pyreaclib"
+# pynucastro
+export PYTHONPATH="$PYTHONPATH:/home/zingale/development/pynucastro"
 
 # prompt -- this gets the git branch in the prompt
 # we also use some coloring.  Note that we need to put the 
