@@ -22,6 +22,13 @@
 ; whitespace
 (add-hook 'python-mode-hook (setq-default show-trailing-whitespace t))
 
+
+; spelling
+; see https://joelkuiper.eu/spellcheck_emacs
+(dolist (hook '(latex-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
+
 ; line truncation
 (global-set-key (kbd "<f6>") 'toggle-truncate-lines)
 

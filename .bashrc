@@ -93,8 +93,8 @@ hostname=`uname -n`
 if [ $hostname == "bender.astro.sunysb.edu" ]; then
     # PGI
     export PGI=/opt/pgi;
-    export PATH=/opt/pgi/linux86-64/17.9/bin:$PATH;
-    export MANPATH=$MANPATH:/opt/pgi/linux86-64/17.9/man;
+    export PATH=/opt/pgi/linux86-64/18.1/bin:$PATH;
+    export MANPATH=$MANPATH:/opt/pgi/linux86-64/18.1/man;
     export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat; 
 
     # CUDA
