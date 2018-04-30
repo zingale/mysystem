@@ -248,3 +248,78 @@ Make sure it is pulling from rpmfusion.
 
 Important, don't get the Xorg stuff from the Nvidia repo -- continue
 getting it from rpmfusion.  Just get CUDA from Nvidia.
+
+
+## PGI compilers
+
+### Installing old GCC
+
+We need an older version of GCC since PGI tends not to be compatible
+with the latest.
+
+  * `wget http://gcc.parentingamerica.com/releases/gcc-5.4.0/gcc-5.4.0.tar.gz`
+
+  * `tar xvzf gcc-5.4.0.tar.gz`
+
+  * `cd gcc-5.4.0`
+
+  * `./contrib/download_prerequisites`
+
+  * in top dir,
+
+    ```
+    mkdir objdir/
+    cd objdir/
+    ../gcc-5.4.0/configure --prefix=/opt/gcc/gcc-5.4/ --enable-languages=c,c++,fortran --disable-multilib
+    ```
+
+  * `make -j 8`
+
+  * (as root)
+
+    ```
+    mkdir /opt/gcc/gcc-5.4
+    make install
+    ```
+
+Now create a module file:
+
+```
+#%Module1.0#####################################################################
+##
+## modules gcc/5.4
+##
+## modulefiles/gcc/5.4
+##
+proc ModulesHelp { } {
+        global version modroot
+
+        puts stderr "gcc/5.4 - sets the Environment for GCC 5.4 in my home directory"
+}
+
+module-whatis   "Sets the environment for using gcc-5.4.0 compilers (C, C++, Fortran)"
+
+# for Tcl script use only
+set     topdir          /opt/gcc/gcc-5.4
+set     version         5.4
+#set     sys             linux86
+
+setenv          CC              $topdir/bin/gcc
+setenv          GCC             $topdir/bin/gcc
+setenv          CXX             $topdir/bin/g++
+setenv          FC              $topdir/bin/gfortran
+setenv          F77             $topdir/bin/gfortran
+setenv          F90             $topdir/bin/gfortran
+prepend-path    PATH            $topdir/include
+prepend-path    PATH            $topdir/bin
+prepend-path    MANPATH         $topdir/man
+prepend-path    LD_LIBRARY_PATH $topdir/lib
+```
+
+as `/etc/modulefiles/gcc/5.4`
+
+now tell PGI to use these:
+
+```
+makelocalrc `pwd` -gcc /opt/gcc/gcc-5.4/bin/gcc -gpp /opt/gcc/gcc-5.4/bin/g++ -g77 /opt/gcc/gcc-5.4/bin/gfortran -x -net
+```

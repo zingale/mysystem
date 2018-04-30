@@ -1,0 +1,10 @@
+matplotlibrc: 
+
+   put this in .config/matplotlib
+
+   check via:
+
+     >>> import matplotlib
+     >>> matplotlib.matplotlib_fname()
+     '/home/foo/.config/matplotlib/matplotlibrc'
+
