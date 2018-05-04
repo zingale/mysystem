@@ -201,6 +201,22 @@ dnf install curl cabextract xorg-x11-font-utils fontconfig
 rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 ```
 
+### Raleway fonts:
+
+download raleway.zip from http://www.fontsquirrel.com/fonts/raleway
+
+unzip
+
+```
+cd /usr/share/fonts
+mkdir raleway
+```
+
+copy .ttf into raleway/
+```
+fc-cache -v
+```
+
 ### Movies
 
 ```
