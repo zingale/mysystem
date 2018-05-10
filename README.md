@@ -130,6 +130,7 @@ dnf install gv enscript netpbm-progs
 ```
 dnf install gcc-gfortran gcc-c++
 dnf install valgrind
+dnf install libasan libubsan
 ```
 
 Useful tools:
