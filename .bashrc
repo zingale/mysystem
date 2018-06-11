@@ -41,8 +41,8 @@ export MICROPHYSICS_HOME=/home/zingale/development/Microphysics
 export MAESTRO_HOME=/home/zingale/development/MAESTRO
 
 # AMReX / BoxLib
-export BOXLIB_HOME=/home/zingale/development/BoxLib/
-export BOXLIB_USE_MPI_WRAPPERS=1
+export FBOXLIB_HOME=/home/zingale/development/FBoxLib/
+
 if [ -e /home/zingale/development/AMReX/ ]; then
     export AMREX_HOME=/home/zingale/development/AMReX/
 else
