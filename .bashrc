@@ -41,7 +41,7 @@ export MICROPHYSICS_HOME=/home/zingale/development/Microphysics
 export MAESTRO_HOME=/home/zingale/development/MAESTRO
 
 # AMReX / BoxLib
-export BOXLIB_HOME=/home/zingale/development/BoxLib/
+export FBOXLIB_HOME=/home/zingale/development/FBoxLib/
 export BOXLIB_USE_MPI_WRAPPERS=1
 if [ -e /home/zingale/development/AMReX/ ]; then
     export AMREX_HOME=/home/zingale/development/AMReX/
@@ -98,7 +98,7 @@ if [ $hostname == "bender.astro.sunysb.edu" ]; then
     export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat; 
 
     # CUDA
-    export CUDA_PATH=/usr/local/cuda-9.1
+    export CUDA_PATH=/usr/local/cuda-9.2
     export PATH=$CUDA_PATH/bin:$PATH
 fi
 
