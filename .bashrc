@@ -42,7 +42,7 @@ export MAESTRO_HOME=/home/zingale/development/MAESTRO
 
 # AMReX / BoxLib
 export FBOXLIB_HOME=/home/zingale/development/FBoxLib/
-export BOXLIB_USE_MPI_WRAPPERS=1
+
 if [ -e /home/zingale/development/AMReX/ ]; then
     export AMREX_HOME=/home/zingale/development/AMReX/
 else
