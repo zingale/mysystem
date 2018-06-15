@@ -340,3 +340,30 @@ now tell PGI to use these:
 ```
 makelocalrc `pwd` -gcc /opt/gcc/gcc-5.4/bin/gcc -gpp /opt/gcc/gcc-5.4/bin/g++ -g77 /opt/gcc/gcc-5.4/bin/gfortran -x -net
 ```
+
+
+## Solvers
+
+### Trilinos
+
+```
+dnf install netcdf netcdf-devel matio matio-devel
+```
+
+crate a `do_config` script with
+
+```
+#!/bin/bash
+
+cmake \
+  -DTPL_ENABLE_MPI=ON \
+  -DMPI_BASE_DIR=/usr/lib64/mpich \
+  -DTrilinos_ENABLE_ALL_PACKAGES=ON \
+  -DTrilinos_ENABLE_Epetra=OFF \
+  -DTrilinos_ENABLE_FEI=OFF \
+  -DCMAKE_INSTALL_PREFIX=/opt/trilinos \
+  ../trilinos-12.12.1-Source
+```
+
+then `./do_config` and `make -j 8 install`
+
