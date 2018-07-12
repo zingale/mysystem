@@ -192,6 +192,14 @@ set `org.gnome.shell.overrides.edge-tiling` to `disabled`
 
 ## Multimedia
 
+### rpmfusion
+
+Enable rpmfusion:
+
+```
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+```
+
 
 ### MS Core Fonts:
 
@@ -269,7 +277,7 @@ getting it from rpmfusion.  Just get CUDA from Nvidia.
 
 ## PGI compilers
 
-### Installing old GCC
+### Installing old GCC (probably not needed)
 
 We need an older version of GCC since PGI tends not to be compatible
 with the latest.
@@ -340,6 +348,38 @@ now tell PGI to use these:
 ```
 makelocalrc `pwd` -gcc /opt/gcc/gcc-5.4/bin/gcc -gpp /opt/gcc/gcc-5.4/bin/g++ -g77 /opt/gcc/gcc-5.4/bin/gfortran -x -net
 ```
+
+### OpenMPI module
+
+```
+#%Module 1.0
+#
+#  MPICH module for use with 'environment-modules' package:
+# 
+
+# Only allow one mpi module to be loaded at a time
+conflict mpich-x64_64
+
+# Define prefix so PATH and MANPATH can be updated.
+set MPI_HOME /opt/pgi/linux86-64/18.4/mpi/openmpi
+setenv        MPI_HOME      $MPI_HOME
+setenv        MPI_BIN       $MPI_HOME/bin
+setenv        MPI_FORTRAN_MOD_DIR $MPI_HOME/lib
+setenv        MPI_INCLUDE   $MPI_HOME/include
+setenv        MPI_LIB       $MPI_HOME/lib
+setenv        MPI_MAN       $MPI_HOME/share/man
+#setenv        MPI_COMPILER  mpich-pgi
+setenv        MPI_SUFFIX    _mpi
+setenv        HYPRE_DIR     /usr/local/hypre-pgi-openmpi/
+
+prepend-path  PATH          $MPI_HOME/bin
+prepend-path  LD_LIBRARY_PATH $MPI_HOME/lib
+prepend-path  LD_LIBRARY_PATH /opt/pgi/linux86-64/18.4/lib
+prepend-path  LD_LIBRARY_PATH /opt/pgi/linux86-64/2018/mpi/openmpi/lib
+prepend-path  MANPATH       $MPI_HOME/share/man
+```
+
+as `/etc/modulefiles/mpi/mpi-pgi`
 
 
 ## Solvers
