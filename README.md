@@ -492,9 +492,7 @@ Once you add, the rebuild should start immediately, and will be seen
 in the above status
 
 
-###
-
-have mdadm send e-mail alerts:
+### have mdadm send e-mail alerts:
 
 https://dustymabe.com/2012/01/29/monitor-raid-arrays-and-get-e-mail-alerts-using-mdadm/
 
