@@ -266,13 +266,18 @@ Do:
 dnf install akmod-nvidia
 ```
 
-Make sure it is pulling from rpmfusion.
+Make sure it is pulling from the `cuda` repo (Nvidia), if necessary by
+doing
+```
+dnf install --disablerepo=rpmfusion-nonfree-updates akmod-nvidia
+```
 
 
 ### CUDA
 
-Important, don't get the Xorg stuff from the Nvidia repo -- continue
-getting it from rpmfusion.  Just get CUDA from Nvidia.
+```
+dnf install --disablerepo=rpmfusion-nonfree-updates cuda
+```
 
 
 ## PGI compilers
