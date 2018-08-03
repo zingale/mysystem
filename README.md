@@ -517,3 +517,30 @@ upon reboot, the mdadm daemon appears to run as:
 ```
 /sbin/mdadm --monitor --scan -f --pid-file=/var/run/mdadm/mdadm.pid
 ```
+
+
+## SMART monitoring
+
+Disk health monitoring with smartctl
+```
+dnf install smartmontools
+```
+
+edit `/etc/smartmontools/smartd.conf`
+
+comment out the first `DEVICESCAN` line and put an explicit entry for
+each device:
+```
+/dev/sda -H -s L/../../7/04 -m michael.zingale@stonybrook.edu -M test
+/dev/sdb -H -s L/../../6/04 -m michael.zingale@stonybrook.edu -M test
+/dev/sdc -H -s L/../../5/04 -m michael.zingale@stonybrook.edu -M test
+/dev/nvme0n1 -H	-m michael.zingale@stonybrook.edu -M test
+```
+
+Here:
+  * `-H` means health check
+  * `-s L/../../7/04` means run a long test every Sunday at 4am
+  * `-m X` means mail `X` with any errors
+  * `-M test` means send a single test email upon smartd startup -- to verify
+   that monitoring is working
+
