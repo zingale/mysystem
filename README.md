@@ -355,7 +355,7 @@ makelocalrc `pwd` -gcc /opt/gcc/gcc-5.4/bin/gcc -gpp /opt/gcc/gcc-5.4/bin/g++ -g
 #%Module 1.0
 #
 #  MPICH module for use with 'environment-modules' package:
-# 
+#
 
 # Only allow one mpi module to be loaded at a time
 conflict mpich-x64_64
@@ -407,3 +407,85 @@ cmake \
 
 then `./do_config` and `make -j 8 install`
 
+
+## RAID management
+
+Software RAID with mdm
+
+### Fresh install on system with existing array
+
+Create the mount point:
+```
+mkdir /raid
+```
+
+Make sure the raid is found.  You can use `lsblk` to list all of the
+block devices on the system, and this will show which are parts of the
+RAID, or you can examine them one-by-one with
+```
+mdadm --examine /dev/sdb1
+```
+
+To get details, do:
+```
+mdadm --detail /dev/md0
+```
+
+To create the configuration file that allows the device to be mounted, do:
+```
+mdadm --detail --scan > /etc/mdadm.conf
+```
+
+Then you can mount this by adding to the fstab:
+```
+/dev/md0               /raid  ext4    defaults        1 2
+```
+
+### Rebuilding
+
+If a disk dropped out of the array, you can add it via:
+```
+mdadm --manage /dev/md0 --add /dev/sdb1
+```
+
+You can see the status as
+```
+cat /proc/mdstat
+```
+
+or via:
+```
+mdadm --detail /dev/md0
+```
+
+Once you add, the rebuild should start immediately, and will be seen
+in the above status
+
+
+###
+
+have mdadm send e-mail alerts:
+
+https://dustymabe.com/2012/01/29/monitor-raid-arrays-and-get-e-mail-alerts-using-mdadm/
+
+add
+```
+MAILADDR michael.zingale@stonybrook.edu
+```
+to `/etc/mdadm.conf`
+
+test this with:
+```
+mdadm --monitor --scan --test -1
+```
+
+enable monitoring
+
+https://raid.wiki.kernel.org/index.php/Detecting,_querying_and_testing
+```
+mdadm --monitor --daemonise --mail=michael.zingale@stonybrook.edu --delay=1800 /dev/md0
+```
+upon reboot, the mdadm daemon appears to run as:
+```
+/sbin/mdadm --monitor --scan -f --pid-file=/var/run/mdadm/mdadm.pid
+```
