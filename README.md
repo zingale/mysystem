@@ -408,6 +408,26 @@ cmake \
 then `./do_config` and `make -j 8 install`
 
 
+## Sending mail
+
+Fedora uses postfix
+```
+dnf install postfix
+```
+
+See this: https://docs.fedoraproject.org/en-US/fedora/f28/system-administrators-guide/servers/Mail_Servers/index.html
+
+> The default /etc/postfix/main.cf file does not allow Postfix to
+> accept network connections from a host other than the local
+> computer.
+
+Since that is what we want (only us to send), we can just do:
+```
+systemctl enable postfix.service
+systemctl start postfix.service
+```
+
+
 ## RAID management
 
 Software RAID with mdm
@@ -439,6 +459,16 @@ mdadm --detail --scan > /etc/mdadm.conf
 Then you can mount this by adding to the fstab:
 ```
 /dev/md0               /raid  ext4    defaults        1 2
+```
+
+Alternately, we can get the UUID of the filesystem via:
+```
+blkid /dev/md0
+```
+
+and then mount via UUID as:
+```
+UUID=a2c185fd-44f7-44a7-8410-4768e44848d6    /raid                   ext4    defaults        1 2
 ```
 
 ### Rebuilding
