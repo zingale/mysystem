@@ -549,3 +549,18 @@ Here:
   * `-M test` means send a single test email upon smartd startup -- to verify
    that monitoring is working
 
+
+
+# Hand commands
+
+## Debugging services
+
+List failed services:
+```
+systemctl list-units --state=failed
+```
+
+What's happening with startup:
+```
+systemd-analyze critical-chain
+```
