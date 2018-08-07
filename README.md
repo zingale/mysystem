@@ -279,6 +279,12 @@ dnf install --disablerepo=rpmfusion-nonfree-updates akmod-nvidia
 dnf install --disablerepo=rpmfusion-nonfree-updates cuda
 ```
 
+For multiple GPUs, set which is wanted for CUDA via:
+```
+export CUDA_VISIBLE_DEVICES=1
+```
+(e.g. for device `1`)
+
 
 ## PGI compilers
 
