@@ -226,6 +226,12 @@ copy .ttf into raleway/
 fc-cache -v
 ```
 
+### other fonts
+
+```
+dnf install adf-gillius-fonts
+```
+
 ### Movies
 
 ```
