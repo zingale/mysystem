@@ -28,6 +28,9 @@
 (dolist (hook '(latex-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 
+(dolist (hook '(rst-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
 
 ; line truncation
 (global-set-key (kbd "<f6>") 'toggle-truncate-lines)
@@ -61,3 +64,4 @@
 
 ; just spaces
 (setq-default indent-tabs-mode nil)
+

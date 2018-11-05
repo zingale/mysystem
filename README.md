@@ -462,6 +462,11 @@ To get details, do:
 mdadm --detail /dev/md0
 ```
 
+or
+```
+cat /prot/mdstat
+```
+
 To create the configuration file that allows the device to be mounted, do:
 ```
 mdadm --detail --scan > /etc/mdadm.conf
