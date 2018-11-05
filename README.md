@@ -1,6 +1,6 @@
 # Fedora Configuration Notes
 
-This is based on a USB live install of Fedora 27
+updated for Fedora 29
 
 
 ## Post Install
@@ -99,6 +99,7 @@ Sphinx infrastructure:
 pip3 install nbsphinx --user
 pip3 install numpydoc --user
 pip3 install sphinx_rtd_theme --user
+pip3 install sphinxcontrib-bibtex --user
 
 dnf install pandoc
 ```
@@ -226,6 +227,12 @@ copy .ttf into raleway/
 fc-cache -v
 ```
 
+### other fonts
+
+```
+dnf install adf-gillius-fonts
+```
+
 ### Movies
 
 ```
@@ -245,7 +252,18 @@ dnf install inkscape gthumb gimp
 
 download slack: https://slack.com/downloads/linux
 ```
-dnf install slack-3.0.5-0.1.fc21.x86_64.rpm
+dnf install slack-3.3.3-0.1.fc21.x86_64.rpm
+
+it will segfault -- see:
+https://stackoverflow.com/questions/53084955/why-does-slack-return-a-segmentation-fault-after-fedora-29-upgrade
+
+the fix, as they note is to install atom and link to its libnode
+
+cd /usr/lib/slack/
+mv libnode.so libnode.so.bad
+ln -s /usr/share/atom/libnode.so .
+
+
 ```
 
 ## Nvidia
