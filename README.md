@@ -99,6 +99,7 @@ Sphinx infrastructure:
 pip3 install nbsphinx --user
 pip3 install numpydoc --user
 pip3 install sphinx_rtd_theme --user
+pip3 install sphinxcontrib-bibtex --user
 
 dnf install pandoc
 ```
