@@ -250,21 +250,11 @@ dnf install inkscape gthumb gimp
 
 ### Slack:
 
-download slack: https://slack.com/downloads/linux
-```
-dnf install slack-3.3.3-0.1.fc21.x86_64.rpm
-
-it will segfault -- see:
-https://stackoverflow.com/questions/53084955/why-does-slack-return-a-segmentation-fault-after-fedora-29-upgrade
-
-the fix, as they note is to install atom and link to its libnode
-
-cd /usr/lib/slack/
-mv libnode.so libnode.so.bad
-ln -s /usr/share/atom/libnode.so .
+The latest slack (3.3.3) segfaults due to libnode.so being
+incompatible with glibc.  The older version, 3.0.5 works fine with
+Fedora 29
 
 
-```
 
 ## Nvidia
 
