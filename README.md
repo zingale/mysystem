@@ -576,7 +576,9 @@ change:
 
 DocumentRoot to "/raid/www/"
 
-and update the block to relax access there
+Beneath that, leave the `/var/www` block alone, but under that,
+change the `/var/www/html` block to `/raid/www` to relax access
+in the html directory.
 
 create an index.html there:
 
@@ -607,7 +609,9 @@ open the firewall
 dnf install firewall-config
 ```
 
-then run firewall-config and check `http`
+then run firewall-config, select the "permanent" configuration from
+the dropdown and check `http`.  (permanent becomes runtime in the next
+boot).
 
 The test page should appear
 
