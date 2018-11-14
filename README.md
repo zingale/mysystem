@@ -554,6 +554,9 @@ Here:
    that monitoring is working
 
 
+Note: you won't get the test e-mails unless you have the `mailx` command
+installed.
+
 
 ## webserver
 
