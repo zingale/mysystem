@@ -167,6 +167,12 @@ MPI:
 dnf install  mpich mpich-devel mpich-autoload
 ```
 
+BLAS
+
+```
+dnf install openblas openblas-devel
+```
+
 
 ## Other Useful Packages
 
@@ -543,6 +549,61 @@ Here:
   * `-m X` means mail `X` with any errors
   * `-M test` means send a single test email upon smartd startup -- to verify
    that monitoring is working
+
+
+
+## webserver
+
+```
+dnf install httpd
+```
+
+in `/etc/httpd/conf/httpd.conf`
+
+change:
+
+```
+ServerName groot.astro.sunysb.edu:80
+```
+
+change:
+
+DocumentRoot to "/raid/www/"
+
+and update the block to relax access there
+
+create an index.html there:
+
+<html>
+<body>
+<div style="width: 100%; font-size: 40px; font-weight: bold; text-align: center;">
+groot.astro.sunysb.edu test page
+</div>
+</body>
+</html>
+
+
+now tell selinux to copy the original /var/www/html permissions:
+
+chcon -R --reference=/var/www/html /raid/www
+
+do
+
+```
+apachectl reload
+systemctl restart httpd.service
+systemctl enable httpd.service
+```
+
+open the firewall
+
+```
+dnf install firewall-config
+```
+
+then run firewall-config and check `http`
+
+The test page should appear
 
 
 
