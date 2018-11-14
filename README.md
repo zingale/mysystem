@@ -5,15 +5,25 @@ updated for Fedora 29
 
 ## Post Install
 
+```
 dnf update
 dnf install emacs
+```
 
+## change root prompt
+
+edit `/root/.bashrc/` and add:
+
+```
+export PS1='\[\e[1;31m\][\u@\h \W]# \[\e[0m\]'
+```
 
 ## Securing
 
 ### SSH
 
 start sshd:
+
 ```
 systemctl enable sshd
 systemctl start sshd
@@ -24,10 +34,13 @@ securing against root login:
 * edit `/etc/ssh/sshd_config`
 
 * change:
+
   ```
   #PermitRootLogin        yes
   ```
+
   to
+
   ```
   PermitRootLogin no
   ```
@@ -54,14 +67,16 @@ install:
   ```
 
 * start it:
+
   ```
   systemctl start fail2ban
   systemctl enable fail2ban
   ```
 
 to see the status:
+
 ```
-fail2ban-client  status sshd
+fail2ban-client status sshd
 ```
 to unban, do:
 ```
@@ -82,14 +97,17 @@ dnf install python3-pylint python3-pyflakes
 
 ```
 pip3 install jupyter --user
+pip3 install numba --user
 ```
 
 Needed for development:
+
 ```
 dnf install openssl-devel
 ```
 
 Testing infrastructure:
+
 ```
 pip3 install pytest --user
 ```
@@ -100,6 +118,7 @@ pip3 install nbsphinx --user
 pip3 install numpydoc --user
 pip3 install sphinx_rtd_theme --user
 pip3 install sphinxcontrib-bibtex --user
+pip3 install breathe --user
 
 dnf install pandoc
 ```
@@ -109,6 +128,7 @@ dnf install pandoc
 
 First line gets most of what is needed.  The remaining packages are used
 by some of my docs:
+
 ```
 dnf install texlive texlive-collection-latex texlive-collection-fontsrecommended texlive-collection-latexextra
 dnf install texlive-epstopdf*
@@ -121,6 +141,7 @@ dnf install texlive-revtex
 ```
 
 Also useful for publishing:
+
 ```
 dnf install gv enscript netpbm-progs
 ```
@@ -135,13 +156,21 @@ dnf install libasan libubsan
 ```
 
 Useful tools:
+
 ```
 dnf install screen xxdiff ack
 ```
 
 MPI:
+
 ```
 dnf install  mpich mpich-devel mpich-autoload
+```
+
+BLAS
+
+```
+dnf install openblas openblas-devel
 ```
 
 
@@ -200,6 +229,9 @@ Enable rpmfusion:
 ```
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 ```
+
+disable the rpmfusion-nonfree.repo and rpmfusion-nonfree-updates.repo
+
 
 
 ### MS Core Fonts:
@@ -269,23 +301,15 @@ need to remove disable wayland in gdm:
 
 ### Drivers
 
-Do:
-```
-dnf install akmod-nvidia
-```
-
-Make sure it is pulling from the `cuda` repo (Nvidia), if necessary by
-doing
-```
-dnf install --disablerepo=rpmfusion-nonfree-updates akmod-nvidia
-```
+Best to install via CUDA (make sure the rpmfusion-nonfree stuff is disabled)
 
 
-### CUDA
+```
+rpm -i https://developer.download.nvidia.com/compute/cuda/repos/fedora27/x86_64/cuda-repo-fedora27-10.0.130-1.x86_64.rpm
+dnf install cuda
+```
 
-```
-dnf install --disablerepo=rpmfusion-nonfree-updates cuda
-```
+That will install the drivers and  CUDA
 
 For multiple GPUs, set which is wanted for CUDA via:
 ```
@@ -293,80 +317,38 @@ export CUDA_VISIBLE_DEVICES=1
 ```
 (e.g. for device `1`)
 
+Test it with
+
+```
+nvidia-smi
+```
+
 
 ## PGI compilers
 
-### Installing old GCC (probably not needed)
-
-We need an older version of GCC since PGI tends not to be compatible
-with the latest.
-
-  * `wget http://gcc.parentingamerica.com/releases/gcc-5.4.0/gcc-5.4.0.tar.gz`
-
-  * `tar xvzf gcc-5.4.0.tar.gz`
-
-  * `cd gcc-5.4.0`
-
-  * `./contrib/download_prerequisites`
-
-  * in top dir,
-
-    ```
-    mkdir objdir/
-    cd objdir/
-    ../gcc-5.4.0/configure --prefix=/opt/gcc/gcc-5.4/ --enable-languages=c,c++,fortran --disable-multilib
-    ```
-
-  * `make -j 8`
-
-  * (as root)
-
-    ```
-    mkdir /opt/gcc/gcc-5.4
-    make install
-    ```
-
-Now create a module file:
-
 ```
-#%Module1.0#####################################################################
-##
-## modules gcc/5.4
-##
-## modulefiles/gcc/5.4
-##
-proc ModulesHelp { } {
-        global version modroot
-
-        puts stderr "gcc/5.4 - sets the Environment for GCC 5.4 in my home directory"
-}
-
-module-whatis   "Sets the environment for using gcc-5.4.0 compilers (C, C++, Fortran)"
-
-# for Tcl script use only
-set     topdir          /opt/gcc/gcc-5.4
-set     version         5.4
-#set     sys             linux86
-
-setenv          CC              $topdir/bin/gcc
-setenv          GCC             $topdir/bin/gcc
-setenv          CXX             $topdir/bin/g++
-setenv          FC              $topdir/bin/gfortran
-setenv          F77             $topdir/bin/gfortran
-setenv          F90             $topdir/bin/gfortran
-prepend-path    PATH            $topdir/include
-prepend-path    PATH            $topdir/bin
-prepend-path    MANPATH         $topdir/man
-prepend-path    LD_LIBRARY_PATH $topdir/lib
+dnf install libatomic
+dnf install ncurses-compat-libs
 ```
 
-as `/etc/modulefiles/gcc/5.4`
-
-now tell PGI to use these:
+untar pgilinux-2018-1810-x86-64.tar.gz and run
 
 ```
-makelocalrc `pwd` -gcc /opt/gcc/gcc-5.4/bin/gcc -gpp /opt/gcc/gcc-5.4/bin/g++ -g77 /opt/gcc/gcc-5.4/bin/gfortran -x -net
+./install
 ```
+
+accept everything.  The license bit will fail, so do
+
+```
+ln -s /lib64/ld-linux-x86-64.so.2 /lib64/ld-lsb-x86-64.so.3
+```
+
+then in `/opt/pgi/linux86-64/18.10/bin`, run
+
+```
+./pgi_license_tool
+```
+
 
 ### OpenMPI module
 
@@ -567,6 +549,61 @@ Here:
   * `-m X` means mail `X` with any errors
   * `-M test` means send a single test email upon smartd startup -- to verify
    that monitoring is working
+
+
+
+## webserver
+
+```
+dnf install httpd
+```
+
+in `/etc/httpd/conf/httpd.conf`
+
+change:
+
+```
+ServerName groot.astro.sunysb.edu:80
+```
+
+change:
+
+DocumentRoot to "/raid/www/"
+
+and update the block to relax access there
+
+create an index.html there:
+
+<html>
+<body>
+<div style="width: 100%; font-size: 40px; font-weight: bold; text-align: center;">
+groot.astro.sunysb.edu test page
+</div>
+</body>
+</html>
+
+
+now tell selinux to copy the original /var/www/html permissions:
+
+chcon -R --reference=/var/www/html /raid/www
+
+do
+
+```
+apachectl reload
+systemctl restart httpd.service
+systemctl enable httpd.service
+```
+
+open the firewall
+
+```
+dnf install firewall-config
+```
+
+then run firewall-config and check `http`
+
+The test page should appear
 
 
 
