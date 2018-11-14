@@ -414,7 +414,10 @@ then `./do_config` and `make -j 8 install`
 Fedora uses postfix
 ```
 dnf install postfix
+dnf install mailx
 ```
+
+(mailx provides the `mail` command)
 
 See this: https://docs.fedoraproject.org/en-US/fedora/f28/system-administrators-guide/servers/Mail_Servers/index.html
 
