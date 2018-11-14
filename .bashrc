@@ -113,3 +113,15 @@ if [ $hostname == "groot.astro.sunysb.edu" ]; then
     export CUDA_PATH=/usr/local/cuda-9.2
     export PATH=$CUDA_PATH/bin:$PATH
 fi
+
+if [ $hostname == "inf.astro.sunysb.edu" ]; then
+    # PGI
+    export PGI=/opt/pgi;
+    export PATH=/opt/pgi/linux86-64/18.10/bin:$PATH;
+    export MANPATH=$MANPATH:/opt/pgi/linux86-64/18.10/man;
+    export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat; 
+
+    # CUDA
+    #export CUDA_PATH=/usr/local/cuda-9.2
+    #export PATH=$CUDA_PATH/bin:$PATH
+fi
