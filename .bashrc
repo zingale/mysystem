@@ -19,6 +19,9 @@ alias ssh='ssh -Y'
 
 alias ipython='ipython3'
 
+if [ `which exa` ]; then
+    alias ls="exa --git"
+fi
 
 # MPI/gfortran stuff
 export GFORTRAN_UNBUFFERED_ALL=1
