@@ -20,7 +20,7 @@ alias ssh='ssh -Y'
 alias ipython='ipython3'
 
 if [ `which exa` ]; then
-    alias ls="exa --git"
+    alias ls="exa --git --group"
 fi
 
 # MPI/gfortran stuff
