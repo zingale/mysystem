@@ -12,6 +12,8 @@
 (add-to-list 'auto-mode-alist '("\\.mak\\'" . makefile-mode))
 (add-to-list 'auto-mode-alist '("Make.*\\'" . makefile-mode))
 
+; castro inputs files
+(add-to-list 'auto-mode-alist '("inputs*" . conf-mode))
 
 ; electric indentation
 (electric-indent-mode 0)
@@ -64,4 +66,3 @@
 
 ; just spaces
 (setq-default indent-tabs-mode nil)
-
