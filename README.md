@@ -383,6 +383,105 @@ prepend-path  MANPATH       $MPI_HOME/share/man
 as `/etc/modulefiles/mpi/mpi-pgi`
 
 
+### GCC 7
+
+The above will get the PGI compilers working with MPI, but not with
+CUDA, since CUDA 10.0 does not support GCC 8.x.  To fix this we need
+to install GCC 7.x and link PGI with them and have them be the
+compilers to use with PGI/CUDA.
+
+1. get the source
+
+   ```
+   wget http://www.netgull.com/gcc/releases/gcc-7.3.0/gcc-7.3.0.tar.gz
+   ```
+
+2. untar:
+
+   ```
+   tar xf gcc-7.3.0.tar.gz
+   ```
+
+3. get the needed packages
+
+   ```
+   cd gcc-7.3.0/
+   ./contrib/download_prerequisites
+   ```
+
+4. make it
+
+   in top dir (above gcc-7.3.0)
+
+   ```
+   mkdir objdir
+   cd objdir
+   ../gcc-7.3.0/configure --prefix=/opt/gcc/gcc/7.3 --enable-languages=c,c++,fortran --disable-multilib --disable-libsanitizer
+
+   make -j 16
+   ```
+
+5. as root:
+
+   ```
+   mkdir /opt/gcc/gcc/7.3
+   make install
+   ```
+
+
+### make a GCC module file
+
+in `/etc/modulefiles/gcc`, add `7.3`:
+
+```
+#%Module1.0#####################################################################
+##
+## modules gcc7.3
+##
+## modulefiles/gcc/7.3
+##
+proc ModulesHelp { } {
+        global version modroot
+
+        puts stderr "gcc/7.3 - sets the Environment for GCC 7.3"
+}
+
+module-whatis   "Sets the environment for using gcc-7.3.0 compilers (C, C++, Fortran)"
+
+# for Tcl script use only
+set     topdir          /opt/gcc/gcc/7.3
+set     version         7.3
+#set     sys             linux86
+
+setenv          CC              $topdir/bin/gcc
+setenv          GCC             $topdir/bin/gcc
+setenv          CXX             $topdir/bin/g++
+setenv          FC              $topdir/bin/gfortran
+setenv          F77             $topdir/bin/gfortran
+setenv          F90             $topdir/bin/gfortran
+prepend-path    PATH            $topdir/include
+prepend-path    PATH            $topdir/bin
+prepend-path    MANPATH         $topdir/man
+prepend-path    LD_LIBRARY_PATH $topdir/lib64
+```
+
+now we can `module load gcc/7.3` to use these compilers.
+
+### PGI
+
+get PGI to recognize these
+```
+cd /opt/pgi/linux86-64/18.10/bin
+module load gcc/7.3
+makelocalrc `pwd` -gcc /opt/gcc/gcc/7.3/bin/gcc -gpp /opt/gcc/gcc/7.3/bin/g++ -g77 /opt/gcc/gcc/7.3/bin/gfortran -x -net
+```
+
+To use CUDA/nvcc, we will always need to do:
+```
+module load gcc/7.3
+```
+first.
+
 ## Solvers
 
 ### Trilinos
@@ -414,7 +513,10 @@ then `./do_config` and `make -j 8 install`
 Fedora uses postfix
 ```
 dnf install postfix
+dnf install mailx
 ```
+
+(mailx provides the `mail` command)
 
 See this: https://docs.fedoraproject.org/en-US/fedora/f28/system-administrators-guide/servers/Mail_Servers/index.html
 
@@ -551,6 +653,9 @@ Here:
    that monitoring is working
 
 
+Note: you won't get the test e-mails unless you have the `mailx` command
+installed.
+
 
 ## webserver
 
@@ -570,7 +675,9 @@ change:
 
 DocumentRoot to "/raid/www/"
 
-and update the block to relax access there
+Beneath that, leave the `/var/www` block alone, but under that,
+change the `/var/www/html` block to `/raid/www` to relax access
+in the html directory.
 
 create an index.html there:
 
@@ -601,7 +708,9 @@ open the firewall
 dnf install firewall-config
 ```
 
-then run firewall-config and check `http`
+then run firewall-config, select the "permanent" configuration from
+the dropdown and check `http`.  (permanent becomes runtime in the next
+boot).
 
 The test page should appear
 

@@ -19,6 +19,9 @@ alias ssh='ssh -Y'
 
 alias ipython='ipython3'
 
+if [ `which exa` ]; then
+    alias ls="exa --git --group"
+fi
 
 # MPI/gfortran stuff
 export GFORTRAN_UNBUFFERED_ALL=1
@@ -39,6 +42,7 @@ export MAESTRO_HOME=/home/zingale/development/MAESTRO
 
 # AMReX / BoxLib
 export FBOXLIB_HOME=/home/zingale/development/FBoxLib/
+export BOXLIB_USE_MPI_WRAPPERS=1
 
 if [ -e /home/zingale/development/AMReX/ ]; then
     export AMREX_HOME=/home/zingale/development/AMReX/
@@ -90,12 +94,12 @@ hostname=`uname -n`
 if [ $hostname == "bender.astro.sunysb.edu" ]; then
     # PGI
     export PGI=/opt/pgi;
-    export PATH=/opt/pgi/linux86-64/18.4/bin:$PATH;
-    export MANPATH=$MANPATH:/opt/pgi/linux86-64/18.4/man;
+    export PATH=/opt/pgi/linux86-64/18.10/bin:$PATH;
+    export MANPATH=$MANPATH:/opt/pgi/linux86-64/18.10/man;
     export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat; 
 
     # CUDA
-    export CUDA_PATH=/usr/local/cuda-9.2
+    export CUDA_PATH=/usr/local/cuda-10.0
     export PATH=$CUDA_PATH/bin:$PATH
 fi
 
