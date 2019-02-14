@@ -19,6 +19,8 @@
 (add-to-list 'auto-mode-alist '("\\.mak\\'" . makefile-mode))
 (add-to-list 'auto-mode-alist '("Make.*\\'" . makefile-mode))
 
+; castro inputs files
+(add-to-list 'auto-mode-alist '("inputs*" . conf-mode))
 
 ; electric indentation
 (electric-indent-mode 0)
@@ -72,6 +74,7 @@
 ; just spaces
 (setq-default indent-tabs-mode nil)
 
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -84,3 +87,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
