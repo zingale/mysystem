@@ -19,9 +19,7 @@ alias ssh='ssh -Y'
 
 alias ipython='ipython3'
 
-if [ `which exa` ]; then
-    alias ls="exa --git --group"
-fi
+alias screenkill="screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs kill"
 
 # MPI/gfortran stuff
 export GFORTRAN_UNBUFFERED_ALL=1
