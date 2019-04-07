@@ -42,6 +42,9 @@ export MAESTRO_HOME=/home/zingale/development/MAESTRO
 export FBOXLIB_HOME=/home/zingale/development/FBoxLib/
 export BOXLIB_USE_MPI_WRAPPERS=1
 
+# initial models
+export INITIAL_MODEL_HOME=/home/zingale/development/initial_models/
+
 if [ -e /home/zingale/development/AMReX/ ]; then
     export AMREX_HOME=/home/zingale/development/AMReX/
 else
