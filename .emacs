@@ -20,7 +20,7 @@
 (add-to-list 'auto-mode-alist '("Make.*\\'" . makefile-mode))
 
 ; castro inputs files
-(add-to-list 'auto-mode-alist '("inputs*\\'" . conf-mode))
+(add-to-list 'auto-mode-alist '("inputs*" . conf-mode))
 
 ; electric indentation
 (electric-indent-mode 0)
