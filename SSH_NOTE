@@ -1,0 +1,11 @@
+for the ssh_config, do:
+
+chmod g-w ssh_config
+
+and then in your ~/.ssh
+
+ln -s ~/mysystem/ssh_config ./config
+
+test with
+
+ssh -G host | grep -i alive
