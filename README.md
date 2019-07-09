@@ -123,6 +123,18 @@ pip3 install breathe --user
 dnf install pandoc
 ```
 
+## Julia
+
+dnf install julia
+
+at the julia prompt:
+```
+using Pkg
+Pkg.add("IJulia")
+
+```
+then you can select the Julia kernel from Jupyter
+
 
 ## LaTeX
 
@@ -716,7 +728,7 @@ The test page should appear
 
 
 
-# Hand commands
+# Handy commands
 
 ## Debugging services
 
@@ -729,3 +741,4 @@ What's happening with startup:
 ```
 systemd-analyze critical-chain
 ```
+
