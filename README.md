@@ -100,6 +100,12 @@ pip3 install jupyter --user
 pip3 install numba --user
 ```
 
+for jupyter lab,
+```
+pip3 install jupyterlab --user
+jupyter lab build
+```
+
 Needed for development:
 
 ```
