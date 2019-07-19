@@ -101,6 +101,11 @@ pip3 install numba --user
 ```
 
 for jupyter lab,
+as root:
+```
+dnf install nodejs
+```
+as user:
 ```
 pip3 install jupyterlab --user
 jupyter lab build
