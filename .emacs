@@ -88,3 +88,6 @@
  ;; If there is more than one, they won't work right.
  )
 
+; show the function name on the status bar
+(which-function-mode 1)
+
