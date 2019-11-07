@@ -91,3 +91,6 @@
 ; show the function name on the status bar
 (which-function-mode 1)
 
+
+(show-paren-mode 1)
+
