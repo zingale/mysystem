@@ -141,7 +141,9 @@ dnf install pandoc
 
 ## Julia
 
+```
 dnf install julia
+```
 
 at the julia prompt:
 ```
@@ -210,7 +212,7 @@ dnf install stellarium gnuplot
 dnf install motif motif-devel
 dnf install libXpm libXpm-devel
 dnf install lyx-fonts
-dnf install revelation
+dnf install keepass
 ```
 
 
@@ -287,7 +289,7 @@ dnf install adf-gillius-fonts
 ### Movies
 
 ```
-dnf install mplayer mencoder gstreamer-plugins-{good,bad,ugly} gstreamer-ffmpeg gstreamer1-libav ffmpeg
+dnf install mplayer mencoder gstreamer-plugins-* gstreamer-ffmpeg gstreamer1-libav ffmpeg
 ```
 
 ### Images
