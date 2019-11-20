@@ -1,7 +1,12 @@
 # Fedora Configuration Notes
 
-updated for Fedora 29
+updated for Fedora 31
 
+## change root password
+
+```
+sudo passwd root
+```
 
 ## Post Install
 
@@ -229,18 +234,9 @@ Run `gnome-tweak-tool`:
 * topbar: turn on date
 
 * windows:
+  * edge-tiling: off (this prevents window from maximizing when it hits the top of the screen)
   * focus is secondary click
   * turn on maximize and minimize
-
-
-### turn off maximize when windows hit top of screen
-
-```
-dnf install dconf-editor
-```
-
-Run `dconf-editor` and
-set `org.gnome.shell.overrides.edge-tiling` to `disabled`
 
 
 ## Multimedia
