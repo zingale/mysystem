@@ -753,3 +753,10 @@ What's happening with startup:
 systemd-analyze critical-chain
 ```
 
+# Libreoffice
+
+Turn off "use background cache":
+
+Tools->options->LibreOffice Impress-> General,
+
+supposed to help with flickering.
