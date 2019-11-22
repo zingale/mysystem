@@ -15,6 +15,14 @@ dnf update
 dnf install emacs
 ```
 
+## show grub menu (it is hidden by default)
+
+```
+grub2-editenv - unset menu_auto_hide
+```
+
+(see https://hansdegoede.livejournal.com/19081.html, https://fedoraproject.org/wiki/Changes/HiddenGrubMenu )
+
 ## change root prompt
 
 edit `/root/.bashrc/` and add:
@@ -270,6 +278,7 @@ download raleway.zip from http://www.fontsquirrel.com/fonts/raleway
 
 unzip
 
+
 ```
 cd /usr/share/fonts
 mkdir raleway
@@ -279,6 +288,7 @@ copy .ttf into raleway/
 ```
 fc-cache -v
 ```
+
 
 ### other fonts
 
