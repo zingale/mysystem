@@ -411,11 +411,11 @@ prepend-path  MANPATH       $MPI_HOME/share/man
 as `/etc/modulefiles/mpi/mpi-pgi`
 
 
-### GCC 7
+### GCC 8
 
 The above will get the PGI compilers working with MPI, but not with
-CUDA, since CUDA 10.0 does not support GCC 8.x.  To fix this we need
-to install GCC 7.x and link PGI with them and have them be the
+CUDA, since CUDA 10.2 does not support GCC 9.x.  To fix this we need
+to install GCC 8.x and link PGI with them and have them be the
 compilers to use with PGI/CUDA.
 
 1. get the source
