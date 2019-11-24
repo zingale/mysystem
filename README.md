@@ -561,6 +561,10 @@ systemctl enable postfix.service
 systemctl start postfix.service
 ```
 
+To look at mail logs to debug, do:
+```
+journalctl --no-pager -t postfix/smtp
+```
 
 ## RAID management
 
