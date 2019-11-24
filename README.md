@@ -439,7 +439,7 @@ compilers to use with PGI/CUDA.
 
 4. make it
 
-   in top dir (above gcc-8.3.0)
+   in top dir (above `gcc-8.3.0/`)
 
    ```
    mkdir objdir
@@ -490,10 +490,13 @@ setenv          F90             $topdir/bin/gfortran
 prepend-path    PATH            $topdir/include
 prepend-path    PATH            $topdir/bin
 prepend-path    MANPATH         $topdir/man
-prepend-path    LD_LIBRARY_PATH $topdir/lib64
+#prepend-path    LD_LIBRARY_PATH $topdir/lib64
 ```
 
-now we can `module load gcc/8.3` to use these compilers.
+Note, that last `LD_LIBRARY_PATH` bit does not seem to be needed
+so it is commented out.
+
+Now we can `module load gcc/8.3` to use these compilers.
 
 ### PGI
 
