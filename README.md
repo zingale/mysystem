@@ -313,10 +313,7 @@ dnf install inkscape gthumb gimp
 
 ### Slack:
 
-The latest slack (3.3.3) segfaults due to libnode.so being
-incompatible with glibc.  The older version, 3.0.5 works fine with
-Fedora 29
-
+Download from: https://slack.com/downloads/linux
 
 
 ## Nvidia
