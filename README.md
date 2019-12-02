@@ -170,6 +170,7 @@ by some of my docs:
 ```
 dnf install texlive texlive-collection-latex texlive-collection-fontsrecommended texlive-collection-latexextra
 dnf install texlive-epstopdf*
+dnf install texlive-latexdiff
 
 dnf install 'tex(raleway.sty)'
 dnf install 'tex(ly1enc.def)'
