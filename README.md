@@ -516,6 +516,19 @@ first.
 
 ## Solvers
 
+### hypre w/ GPU support
+
+```
+git clone git@github.com:hypre-space/hypre.git
+cd hypre/src
+module load gcc/8.3
+module swap mpi mpi/mpi-pgi
+HYPRE_CUDA_SM=70 CXX=mpicxx CC=mpicc FC=mpifort ./configure --prefix=/path/to/Hypre/install --with-MPI --with-cuda --enable-unified-memory
+make -j 4
+make install
+```
+
+
 ### Trilinos
 
 ```
