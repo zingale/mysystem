@@ -84,10 +84,6 @@ else
 fi
 
 
-if [ -e /usr/local/hypre ]; then
-    export HYPRE_DIR=/usr/local/hypre
-fi
-
 # pick up .local first
 export PATH=~/.local/bin:${PATH}
 
@@ -114,6 +110,11 @@ if [ $hostname == "groot.astro.sunysb.edu" ]; then
     # CUDA
     export CUDA_PATH=/usr/local/cuda-10.2
     export PATH=$CUDA_PATH/bin:$PATH
+
+    # HYPRE
+    export HYPRE_DIR=/opt/hypre/hypre-2.18
+fi
+
 fi
 
 if [ $hostname == "inf.astro.sunysb.edu" ]; then
