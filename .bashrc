@@ -32,6 +32,8 @@ fi
 export PYTHONPATH=/home/zingale/development/AmrPostprocessing/python:$PYTHONPATH
 export PATH=/home/zingale/development/AmrPostprocessing/python:$PATH
 
+export PYTHONPATH=/home/zingale/development/Microphysics/python_library:$PYTHONPATH
+
 # Microphysics
 export MICROPHYSICS_HOME=/home/zingale/development/Microphysics
 
