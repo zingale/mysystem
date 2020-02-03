@@ -1,7 +1,12 @@
 # Fedora Configuration Notes
 
-updated for Fedora 29
+updated for Fedora 31
 
+## change root password
+
+```
+sudo passwd root
+```
 
 ## Post Install
 
@@ -9,6 +14,14 @@ updated for Fedora 29
 dnf update
 dnf install emacs
 ```
+
+## show grub menu (it is hidden by default)
+
+```
+grub2-editenv - unset menu_auto_hide
+```
+
+(see https://hansdegoede.livejournal.com/19081.html, https://fedoraproject.org/wiki/Changes/HiddenGrubMenu )
 
 ## change root prompt
 
@@ -136,7 +149,9 @@ dnf install pandoc
 
 ## Julia
 
+```
 dnf install julia
+```
 
 at the julia prompt:
 ```
@@ -155,6 +170,7 @@ by some of my docs:
 ```
 dnf install texlive texlive-collection-latex texlive-collection-fontsrecommended texlive-collection-latexextra
 dnf install texlive-epstopdf*
+dnf install texlive-latexdiff
 
 dnf install 'tex(raleway.sty)'
 dnf install 'tex(ly1enc.def)'
@@ -173,7 +189,7 @@ dnf install gv enscript netpbm-progs
 ## Developing
 
 ```
-dnf install gcc-gfortran gcc-c++
+dnf install gcc-gfortran gcc-c++ redhat-rpm-config
 dnf install valgrind
 dnf install libasan libubsan
 ```
@@ -205,7 +221,7 @@ dnf install stellarium gnuplot
 dnf install motif motif-devel
 dnf install libXpm libXpm-devel
 dnf install lyx-fonts
-dnf install revelation
+dnf install keepass
 ```
 
 
@@ -229,18 +245,9 @@ Run `gnome-tweak-tool`:
 * topbar: turn on date
 
 * windows:
+  * edge-tiling: off (this prevents window from maximizing when it hits the top of the screen)
   * focus is secondary click
   * turn on maximize and minimize
-
-
-### turn off maximize when windows hit top of screen
-
-```
-dnf install dconf-editor
-```
-
-Run `dconf-editor` and
-set `org.gnome.shell.overrides.edge-tiling` to `disabled`
 
 
 ## Multimedia
@@ -272,6 +279,7 @@ download raleway.zip from http://www.fontsquirrel.com/fonts/raleway
 
 unzip
 
+
 ```
 cd /usr/share/fonts
 mkdir raleway
@@ -282,6 +290,7 @@ copy .ttf into raleway/
 fc-cache -v
 ```
 
+
 ### other fonts
 
 ```
@@ -291,7 +300,7 @@ dnf install adf-gillius-fonts
 ### Movies
 
 ```
-dnf install mplayer mencoder gstreamer-plugins-{good,bad,ugly} gstreamer-ffmpeg gstreamer1-libav ffmpeg
+dnf install mplayer mencoder gstreamer-plugins-* gstreamer-ffmpeg gstreamer1-libav ffmpeg
 ```
 
 ### Images
@@ -305,10 +314,7 @@ dnf install inkscape gthumb gimp
 
 ### Slack:
 
-The latest slack (3.3.3) segfaults due to libnode.so being
-incompatible with glibc.  The older version, 3.0.5 works fine with
-Fedora 29
-
+Download from: https://slack.com/downloads/linux
 
 
 ## Nvidia
@@ -406,40 +412,40 @@ prepend-path  MANPATH       $MPI_HOME/share/man
 as `/etc/modulefiles/mpi/mpi-pgi`
 
 
-### GCC 7
+### GCC 8
 
 The above will get the PGI compilers working with MPI, but not with
-CUDA, since CUDA 10.0 does not support GCC 8.x.  To fix this we need
-to install GCC 7.x and link PGI with them and have them be the
+CUDA, since CUDA 10.2 does not support GCC 9.x.  To fix this we need
+to install GCC 8.x and link PGI with them and have them be the
 compilers to use with PGI/CUDA.
 
 1. get the source
 
    ```
-   wget http://www.netgull.com/gcc/releases/gcc-7.3.0/gcc-7.3.0.tar.gz
+   wget http://www.netgull.com/gcc/releases/gcc-8.3.0/gcc-8.3.0.tar.gz
    ```
 
 2. untar:
 
    ```
-   tar xf gcc-7.3.0.tar.gz
+   tar xf gcc-8.3.0.tar.gz
    ```
 
 3. get the needed packages
 
    ```
-   cd gcc-7.3.0/
+   cd gcc-8.3.0/
    ./contrib/download_prerequisites
    ```
 
 4. make it
 
-   in top dir (above gcc-7.3.0)
+   in top dir (above `gcc-8.3.0/`)
 
    ```
    mkdir objdir
    cd objdir
-   ../gcc-7.3.0/configure --prefix=/opt/gcc/gcc/7.3 --enable-languages=c,c++,fortran --disable-multilib --disable-libsanitizer
+   ../gcc-8.3.0/configure --prefix=/opt/gcc/gcc-8.3 --enable-languages=c,c++,fortran --disable-multilib --disable-libsanitizer
 
    make -j 16
    ```
@@ -447,33 +453,33 @@ compilers to use with PGI/CUDA.
 5. as root:
 
    ```
-   mkdir /opt/gcc/gcc/7.3
+   mkdir /opt/gcc/gcc-8.3
    make install
    ```
 
 
 ### make a GCC module file
 
-in `/etc/modulefiles/gcc`, add `7.3`:
+in `/etc/modulefiles/gcc`, add `8.3`:
 
 ```
 #%Module1.0#####################################################################
 ##
-## modules gcc7.3
+## modules gcc8.3
 ##
-## modulefiles/gcc/7.3
+## modulefiles/gcc-8.3
 ##
 proc ModulesHelp { } {
         global version modroot
 
-        puts stderr "gcc/7.3 - sets the Environment for GCC 7.3"
+        puts stderr "gcc/8.3 - sets the Environment for GCC 9.3"
 }
 
-module-whatis   "Sets the environment for using gcc-7.3.0 compilers (C, C++, Fortran)"
+module-whatis   "Sets the environment for using gcc-8.3.0 compilers (C, C++, Fortran)"
 
 # for Tcl script use only
-set     topdir          /opt/gcc/gcc/7.3
-set     version         7.3
+set     topdir          /opt/gcc/gcc-8.3
+set     version         8.3
 #set     sys             linux86
 
 setenv          CC              $topdir/bin/gcc
@@ -485,27 +491,43 @@ setenv          F90             $topdir/bin/gfortran
 prepend-path    PATH            $topdir/include
 prepend-path    PATH            $topdir/bin
 prepend-path    MANPATH         $topdir/man
-prepend-path    LD_LIBRARY_PATH $topdir/lib64
+#prepend-path    LD_LIBRARY_PATH $topdir/lib64
 ```
 
-now we can `module load gcc/7.3` to use these compilers.
+Note, that last `LD_LIBRARY_PATH` bit does not seem to be needed
+so it is commented out.
+
+Now we can `module load gcc/8.3` to use these compilers.
 
 ### PGI
 
 get PGI to recognize these
 ```
-cd /opt/pgi/linux86-64/18.10/bin
-module load gcc/7.3
-makelocalrc `pwd` -gcc /opt/gcc/gcc/7.3/bin/gcc -gpp /opt/gcc/gcc/7.3/bin/g++ -g77 /opt/gcc/gcc/7.3/bin/gfortran -x -net
+cd /opt/pgi/linux86-64/19.10/bin
+module load gcc/8.3
+makelocalrc `pwd` -gcc /opt/gcc/gcc-8.3/bin/gcc -gpp /opt/gcc/gcc-8.3/bin/g++ -g77 /opt/gcc/gcc-8.3/bin/gfortran -x -net
 ```
 
 To use CUDA/nvcc, we will always need to do:
 ```
-module load gcc/7.3
+module load gcc/8.3
 ```
 first.
 
 ## Solvers
+
+### hypre w/ GPU support
+
+```
+git clone git@github.com:hypre-space/hypre.git
+cd hypre/src
+module load gcc/8.3
+module swap mpi mpi/mpi-pgi
+HYPRE_CUDA_SM=70 CXX=mpicxx CC=mpicc FC=mpifort ./configure --prefix=/path/to/Hypre/install --with-MPI --with-cuda --enable-unified-memory
+make -j 4
+make install
+```
+
 
 ### Trilinos
 
@@ -553,6 +575,10 @@ systemctl enable postfix.service
 systemctl start postfix.service
 ```
 
+To look at mail logs to debug, do:
+```
+journalctl --no-pager -t postfix/smtp
+```
 
 ## RAID management
 
