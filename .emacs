@@ -125,3 +125,11 @@
 
 
 (set-face-italic 'font-lock-comment-face 1)
+
+
+;; highlight the current line
+;; https://emacs.stackexchange.com/questions/27821/highlight-current-line-without-changing-colours
+(global-hl-line-mode 1)
+(set-face-background 'hl-line "#333333")
+(set-face-foreground 'highlight nil)
+
