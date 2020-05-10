@@ -4,9 +4,6 @@
 [push]
 	default = simple
 
-[pull]
-        rebase = true
-
 [user]
         name = Michael Zingale
 	email = michael.zingale@stonybrook.edu
