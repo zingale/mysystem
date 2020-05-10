@@ -133,3 +133,5 @@
 (set-face-background 'hl-line "#33355")
 (set-face-foreground 'highlight nil)
 
+;; 24.1 changed how backspace worked
+(setq delete-active-region nil)
