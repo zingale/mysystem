@@ -130,6 +130,8 @@
 ;; highlight the current line
 ;; https://emacs.stackexchange.com/questions/27821/highlight-current-line-without-changing-colours
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "#333333")
+(set-face-background 'hl-line "#33355")
 (set-face-foreground 'highlight nil)
 
+;; 24.1 changed how backspace worked
+(setq delete-active-region nil)
