@@ -249,6 +249,16 @@ Run `gnome-tweak-tool`:
   * focus is secondary click
   * turn on maximize and minimize
 
+### connector
+
+```
+dnf install chrome-gnome-shell
+```
+
+### sound selector:
+
+https://extensions.gnome.org/extension/906/sound-output-device-chooser/
+
 
 ## Multimedia
 

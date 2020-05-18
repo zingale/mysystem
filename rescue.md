@@ -4,15 +4,28 @@ Rescuing when there is a GRUB issue:
 
 * boot as normal
 
+  (I got a blank screen and needed to do `esc` and then at the "boot:"
+  prompt, type "linux")
+
 * open terminal and setup for chroot:
 
   * following: https://docs.fedoraproject.org/en-US/Fedora/22/html/Multiboot_Guide/common_operations_appendix.html
 
   * mkdir /mnt/sysimage
 
-  * blkid -- look for the root partition (for me it was /dev/sda3)
+  * blkid -- look for the root partition 
 
-  * mount /dev/sda3 /mnt/sysimage
+    for me it was lvm, so I needed to do:
+
+    https://pario.no/2015/11/02/how-to-mount-lvm-partitions-from-rescue-mode/
+
+    lvm vgscan -v
+    vgchange -a y "fedora"
+    lvm lvs --all
+
+    then mount it
+
+  * mount /dev/fedora/root /mnt/sysimage
 
     you should see /mnt/sysimage/etc/fedora-release if this is correct
 
@@ -31,11 +44,15 @@ Now fix grub:
 
   * following: https://fedoraproject.org/wiki/Common_F30_bugs#GRUB_boot_menu_is_not_populated_after_an_upgrade
 
-  * cd to /mnt/sysimage/boot/grub2
+  * cd to /boot/grub2
 
-  * restore old grub.cfg (it is .rpmsave)
+  * remake the grub.cfg:
+
+    grub2-mkconfig -o /boot/grub2/grub.cfg
 
   * grub2-install /dev/sda
+
+
 
 
 
