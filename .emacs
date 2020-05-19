@@ -136,3 +136,6 @@
 ;; 24.1 changed how backspace worked
 (setq delete-active-region nil)
 
+;; show line numbers
+
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
