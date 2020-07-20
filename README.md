@@ -796,3 +796,15 @@ Turn off "use background cache":
 Tools->options->LibreOffice Impress-> General,
 
 supposed to help with flickering.
+
+
+# wacom
+
+Plugged in and it was recognized as "android touchpad" in the settings
+panel for it.  Following hints online, I held down the first and last
+button for a few seconds -- X restarted and it came up as a tablet.
+Eventually the stylus options appeared in the panel as well.
+
+I am using it in relative mode and it works great with Xournal++::
+
+  dnf install xournalpp
