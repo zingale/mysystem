@@ -139,3 +139,7 @@
 ;; show line numbers
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+;; column number mode
+(setq column-number-mode t)
+
