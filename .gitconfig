@@ -13,3 +13,4 @@
         # git fetch-pr 7
         # then "git checkout pr-7
         fetch-pr =!sh -c 'git fetch origin +pull/$1/head:pr-$1' fetch-pr
+        fetch-upstream-pr =!sh -c 'git fetch upstream +pull/$1/head:pr-$1' fetch-pr
