@@ -31,6 +31,9 @@
 ; whitespace
 (add-hook 'python-mode-hook (setq-default show-trailing-whitespace t))
 
+; C++ 4 spaces indenting
+(setq-default c-default-style "linux"
+              c-basic-offset 4)
 
 ; spelling
 ; see https://joelkuiper.eu/spellcheck_emacs
@@ -100,6 +103,7 @@
 ;; rainbow paranthesis
 (load "~/mysystem/rainbow-delimiters.el")
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'latex-mode-hook 'rainbow-delimiters-mode)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
