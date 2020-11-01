@@ -1,6 +1,6 @@
 # Fedora Configuration Notes
 
-updated for Fedora 31
+updated for Fedora 33
 
 ## change root password
 
@@ -189,7 +189,7 @@ dnf install gv enscript netpbm-progs
 ## Developing
 
 ```
-dnf install gcc-gfortran gcc-c++ redhat-rpm-config
+dnf install gcc-gfortran gcc-c++ redhat-rpm-config make
 dnf install valgrind
 dnf install libasan libubsan
 ```

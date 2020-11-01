@@ -16,3 +16,7 @@
         fetch-upstream-pr =!sh -c 'git fetch upstream +pull/$1/head:pr-$1' fetch-pr
 [pull]
 	rebase = false
+
+[core]
+	editor = vi
+
