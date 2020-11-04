@@ -808,3 +808,10 @@ Eventually the stylus options appeared in the panel as well.
 I am using it in relative mode and it works great with Xournal++::
 
   dnf install xournalpp
+
+# laptop battery
+
+```
+dnf install tlp tlp-rdw
+systemctl enable tlp.service
+```
