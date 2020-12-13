@@ -31,6 +31,9 @@
 ; whitespace
 (add-hook 'python-mode-hook (setq-default show-trailing-whitespace t))
 
+; C++ 4 spaces indenting
+(setq-default c-default-style "linux"
+              c-basic-offset 4)
 
 ; spelling
 ; see https://joelkuiper.eu/spellcheck_emacs
@@ -38,6 +41,12 @@
   (add-hook hook (lambda () (flyspell-mode 1))))
 
 (dolist (hook '(rst-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
+(dolist (hook '(html-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
+(dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 
 
@@ -97,6 +106,7 @@
 ;; rainbow paranthesis
 (load "~/mysystem/rainbow-delimiters.el")
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'latex-mode-hook 'rainbow-delimiters-mode)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -139,3 +149,7 @@
 ;; show line numbers
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+;; column number mode
+(setq column-number-mode t)
+

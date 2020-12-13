@@ -1,6 +1,6 @@
 # Fedora Configuration Notes
 
-updated for Fedora 31
+updated for Fedora 33
 
 ## change root password
 
@@ -189,7 +189,7 @@ dnf install gv enscript netpbm-progs
 ## Developing
 
 ```
-dnf install gcc-gfortran gcc-c++ redhat-rpm-config
+dnf install gcc-gfortran gcc-c++ redhat-rpm-config make
 dnf install valgrind
 dnf install libasan libubsan
 ```
@@ -796,3 +796,22 @@ Turn off "use background cache":
 Tools->options->LibreOffice Impress-> General,
 
 supposed to help with flickering.
+
+
+# wacom
+
+Plugged in and it was recognized as "android touchpad" in the settings
+panel for it.  Following hints online, I held down the first and last
+button for a few seconds -- X restarted and it came up as a tablet.
+Eventually the stylus options appeared in the panel as well.
+
+I am using it in relative mode and it works great with Xournal++::
+
+  dnf install xournalpp
+
+# laptop battery
+
+```
+dnf install tlp tlp-rdw
+systemctl enable tlp.service
+```
