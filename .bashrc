@@ -116,7 +116,7 @@ if [ $hostname == "groot.astro.sunysb.edu" ]; then
     export PATH=$CUDA_PATH/bin:$PATH
 
     # HYPRE
-    export HYPRE_DIR=/opt/hypre/hypre-2.18
+    export HYPRE_DIR=/opt/hypre/hypre-2.20
 fi
 
 
