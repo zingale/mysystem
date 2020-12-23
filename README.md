@@ -815,3 +815,13 @@ I am using it in relative mode and it works great with Xournal++::
 dnf install tlp tlp-rdw
 systemctl enable tlp.service
 ```
+
+# firmware updates
+
+Firmware updates are handled by gnome-software.  This frequently fails
+to refresh.  Do the following:
+
+```
+killall gnome-software
+rm -rf ~/.cache/gnome-software
+```
