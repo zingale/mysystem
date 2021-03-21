@@ -19,6 +19,8 @@ alias ssh='ssh -Y'
 
 alias ipython='ipython3'
 
+export EDITOR="emacs -nw"
+
 alias screenkill="screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs kill"
 
 # MPI/gfortran stuff
@@ -114,7 +116,7 @@ if [ $hostname == "groot.astro.sunysb.edu" ]; then
     export PATH=$CUDA_PATH/bin:$PATH
 
     # HYPRE
-    export HYPRE_DIR=/opt/hypre/hypre-2.18
+    export HYPRE_DIR=/opt/hypre/hypre-2.20
 fi
 
 
@@ -133,3 +135,11 @@ if [ $hostname == "inf.astro.sunysb.edu" ]; then
     export HYPRE_DIR=/opt/hypre/hypre-2.18
 
 fi
+
+
+# hack for my laptop
+
+if [ "`cat /etc/machine-id`" == "cbd4091cb4e449679f543c1f61d6b4cf" ]; then
+    alias zoom="QT_DEVICE_PIXEL_RATIO=2 zoom"
+fi
+

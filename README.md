@@ -683,6 +683,7 @@ I am using it in relative mode and it works great with Xournal++::
 
   dnf install xournalpp
 
+
 # system upgrades
 
 If a system upgrade doesn't take do:
@@ -692,4 +693,25 @@ dnf system-upgrade log
 you might need to specify a number, like:
 ```
 dnf system-upgrade log --number 2
+
+
+# laptop battery
+
 ```
+dnf install tlp tlp-rdw
+systemctl enable tlp.service
+```
+
+# firmware updates
+
+Firmware updates are handled by gnome-software.  This frequently fails
+to refresh.  Do the following:
+
+# gnome software
+
+```
+killall gnome-software
+rm -rf ~/.cache/gnome-software
+```
+
+
