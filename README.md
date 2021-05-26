@@ -304,7 +304,8 @@ fc-cache -v
 ### other fonts
 
 ```
-dnf install adf-gillius-fonts
+dnf install adf-gillius-fonts mozilla-fira-sans-fonts*
+
 ```
 
 ### Movies
@@ -344,7 +345,8 @@ Best to install via CUDA (make sure the rpmfusion-nonfree stuff is disabled)
 
 
 ```
-rpm -i https://developer.download.nvidia.com/compute/cuda/repos/fedora27/x86_64/cuda-repo-fedora27-10.0.130-1.x86_64.rpm
+dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/fedora33/x86_64/cuda-fedora33.rep
+dnf module install nvidia-driver:latest-dkms
 dnf install cuda
 ```
 
@@ -363,166 +365,38 @@ nvidia-smi
 ```
 
 
-## PGI compilers
+## HIP/ROCm
+
+follow: https://rigtorp.se/notes/rocm/
+
+add `/etc/yum.repos.d/ROCm.repo`:
 
 ```
-dnf install libatomic
-dnf install ncurses-compat-libs
+[ROCm]
+name=ROCm
+baseurl=http://repo.radeon.com/rocm/centos8/rpm
+enabled=1
+gpgcheck=1
+gpgkey=http://repo.radeon.com/rocm/rocm.gpg.key
 ```
 
-untar pgilinux-2018-1810-x86-64.tar.gz and run
-
 ```
-./install
+dnf install rocm-device-libs hsakmt-roct hip-samples hipify-clang
 ```
 
-accept everything.  The license bit will fail, so do
-
 ```
-ln -s /lib64/ld-linux-x86-64.so.2 /lib64/ld-lsb-x86-64.so.3
+dnf repoquery --location rocminfo
 ```
 
-then in `/opt/pgi/linux86-64/18.10/bin`, run
-
+using that output:
 ```
-./pgi_license_tool
-```
-
-
-### OpenMPI module
-
-```
-#%Module 1.0
-#
-#  MPICH module for use with 'environment-modules' package:
-#
-
-# Only allow one mpi module to be loaded at a time
-conflict mpich-x64_64
-
-# Define prefix so PATH and MANPATH can be updated.
-set MPI_HOME /opt/pgi/linux86-64/18.4/mpi/openmpi
-setenv        MPI_HOME      $MPI_HOME
-setenv        MPI_BIN       $MPI_HOME/bin
-setenv        MPI_FORTRAN_MOD_DIR $MPI_HOME/lib
-setenv        MPI_INCLUDE   $MPI_HOME/include
-setenv        MPI_LIB       $MPI_HOME/lib
-setenv        MPI_MAN       $MPI_HOME/share/man
-#setenv        MPI_COMPILER  mpich-pgi
-setenv        MPI_SUFFIX    _mpi
-setenv        HYPRE_DIR     /usr/local/hypre-pgi-openmpi/
-
-prepend-path  PATH          $MPI_HOME/bin
-prepend-path  LD_LIBRARY_PATH $MPI_HOME/lib
-prepend-path  LD_LIBRARY_PATH /opt/pgi/linux86-64/18.4/lib
-prepend-path  LD_LIBRARY_PATH /opt/pgi/linux86-64/2018/mpi/openmpi/lib
-prepend-path  MANPATH       $MPI_HOME/share/man
+rpm -Uvh --nodeps http://repo.radeon.com/rocm/centos8/rpm/rocminfo-1.4.0.1.rocm-rel-4.0-23-605b3a5.rpm
 ```
 
-as `/etc/modulefiles/mpi/mpi-pgi`
+fix shebang for python in `/opt/rocm-4.0.0/bin/rocm_agent_enumerator` to be `/usr/bin/python`
+(need to temporarily `chmod a+w /opt/rocm-4.0.0/bin/rocm_agent_enumerator`)
 
 
-### GCC 8
-
-The above will get the PGI compilers working with MPI, but not with
-CUDA, since CUDA 10.2 does not support GCC 9.x.  To fix this we need
-to install GCC 8.x and link PGI with them and have them be the
-compilers to use with PGI/CUDA.
-
-1. get the source
-
-   ```
-   wget http://www.netgull.com/gcc/releases/gcc-8.3.0/gcc-8.3.0.tar.gz
-   ```
-
-2. untar:
-
-   ```
-   tar xf gcc-8.3.0.tar.gz
-   ```
-
-3. get the needed packages
-
-   ```
-   cd gcc-8.3.0/
-   ./contrib/download_prerequisites
-   ```
-
-4. make it
-
-   in top dir (above `gcc-8.3.0/`)
-
-   ```
-   mkdir objdir
-   cd objdir
-   ../gcc-8.3.0/configure --prefix=/opt/gcc/gcc-8.3 --enable-languages=c,c++,fortran --disable-multilib --disable-libsanitizer
-
-   make -j 16
-   ```
-
-5. as root:
-
-   ```
-   mkdir /opt/gcc/gcc-8.3
-   make install
-   ```
-
-
-### make a GCC module file
-
-in `/etc/modulefiles/gcc`, add `8.3`:
-
-```
-#%Module1.0#####################################################################
-##
-## modules gcc8.3
-##
-## modulefiles/gcc-8.3
-##
-proc ModulesHelp { } {
-        global version modroot
-
-        puts stderr "gcc/8.3 - sets the Environment for GCC 9.3"
-}
-
-module-whatis   "Sets the environment for using gcc-8.3.0 compilers (C, C++, Fortran)"
-
-# for Tcl script use only
-set     topdir          /opt/gcc/gcc-8.3
-set     version         8.3
-#set     sys             linux86
-
-setenv          CC              $topdir/bin/gcc
-setenv          GCC             $topdir/bin/gcc
-setenv          CXX             $topdir/bin/g++
-setenv          FC              $topdir/bin/gfortran
-setenv          F77             $topdir/bin/gfortran
-setenv          F90             $topdir/bin/gfortran
-prepend-path    PATH            $topdir/include
-prepend-path    PATH            $topdir/bin
-prepend-path    MANPATH         $topdir/man
-#prepend-path    LD_LIBRARY_PATH $topdir/lib64
-```
-
-Note, that last `LD_LIBRARY_PATH` bit does not seem to be needed
-so it is commented out.
-
-Now we can `module load gcc/8.3` to use these compilers.
-
-### PGI
-
-get PGI to recognize these
-```
-cd /opt/pgi/linux86-64/19.10/bin
-module load gcc/8.3
-makelocalrc `pwd` -gcc /opt/gcc/gcc-8.3/bin/gcc -gpp /opt/gcc/gcc-8.3/bin/g++ -g77 /opt/gcc/gcc-8.3/bin/gfortran -x -net
-```
-
-To use CUDA/nvcc, we will always need to do:
-```
-module load gcc/8.3
-```
-first.
 
 ## Solvers
 
@@ -809,9 +683,35 @@ I am using it in relative mode and it works great with Xournal++::
 
   dnf install xournalpp
 
+
+# system upgrades
+
+If a system upgrade doesn't take do:
+```
+dnf system-upgrade log 
+```
+you might need to specify a number, like:
+```
+dnf system-upgrade log --number 2
+
+
 # laptop battery
 
 ```
 dnf install tlp tlp-rdw
 systemctl enable tlp.service
 ```
+
+# firmware updates
+
+Firmware updates are handled by gnome-software.  This frequently fails
+to refresh.  Do the following:
+
+# gnome software
+
+```
+killall gnome-software
+rm -rf ~/.cache/gnome-software
+```
+
+

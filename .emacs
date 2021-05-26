@@ -8,8 +8,7 @@
 (load-theme 'tango-dark)
 
 ; file formats
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown files" t)
+(load "~/mysystem/markdown-mode.el")
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.list\\'" . markdown-mode))
 
@@ -110,6 +109,7 @@
 (load "~/mysystem/rainbow-delimiters.el")
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'latex-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'markdown-mode-hook 'rainbow-delimiters-mode)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

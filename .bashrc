@@ -135,3 +135,11 @@ if [ $hostname == "inf.astro.sunysb.edu" ]; then
     export HYPRE_DIR=/opt/hypre/hypre-2.18
 
 fi
+
+
+# hack for my laptop
+
+if [ "`cat /etc/machine-id`" == "cbd4091cb4e449679f543c1f61d6b4cf" ]; then
+    alias zoom="QT_DEVICE_PIXEL_RATIO=2 zoom"
+fi
+
