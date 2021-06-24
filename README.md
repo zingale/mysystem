@@ -60,6 +60,9 @@ securing against root login:
 
 ### fail2ban
 
+
+(for CentOS, do: `dnf install epel-release`)
+
 install:
 
 * `dnf install fail2ban`
@@ -98,6 +101,11 @@ fail2ban-client set sshd unbanip <IP>
 
 
 ## python
+
+For CentOS, do:
+```
+alternatives --set python /usr/bin/python3
+```
 
 Install core packages via `dnf`, install rapidly changing/specialty ones through
 pip.
