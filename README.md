@@ -731,3 +731,12 @@ rm -rf ~/.cache/gnome-software
 ```
 
 
+# Zoom
+
+Hack to get Zoom working with GNOME 41 + Wayland:
+
+1. press ALT+F2
+2. enter `lg`
+3. enter `global.context.unsafe_mode=true`
+
+see this thread: https://community.zoom.com/t5/Meetings/Wayland-screen-sharing-broken-with-GNOME-41-on-Fedora-35/m-p/22539
