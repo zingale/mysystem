@@ -656,6 +656,14 @@ boot).
 The test page should appear
 
 
+# Nameserver
+
+If the nameserver is not working do:
+
+```
+systemctl restart systemd-resolved
+```
+
 
 # Handy commands
 
