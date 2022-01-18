@@ -102,11 +102,11 @@ fi
 if [ $hostname == "groot.astro.sunysb.edu" ]; then
 
     # CUDA
-    export CUDA_PATH=/usr/local/cuda-11.4
+    export CUDA_PATH=/usr/local/cuda-11.6
     export PATH=$CUDA_PATH/bin:$PATH
 
     # HYPRE
-    export HYPRE_DIR=/opt/hypre/hypre-2.20
+    export HYPRE_DIR=/opt/hypre/hypre-2.23
 fi
 
 
