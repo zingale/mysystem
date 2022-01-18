@@ -156,3 +156,6 @@
 ;; column number mode
 (setq column-number-mode t)
 
+
+;; window tab line
+(global-tab-line-mode 1)
