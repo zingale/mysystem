@@ -151,7 +151,11 @@ pip3 install numpydoc --user
 pip3 install sphinx_rtd_theme --user
 pip3 install sphinxcontrib-bibtex --user
 pip3 install breathe --user
+pip3 install sphinx-copybutton --user
+pip3 install sphinx-prompt --user
+```
 
+```
 dnf install pandoc
 ```
 
@@ -229,33 +233,48 @@ dnf install stellarium gnuplot
 dnf install motif motif-devel
 dnf install libXpm libXpm-devel
 dnf install lyx-fonts
-dnf install keepass
+dnf install keepassx
 ```
 
 
 ## GNOME
 
 ```
-dnf install gnome-tweak-tool levien-inconsolata-fonts
+dnf install gnome-tweaks levien-inconsolata-fonts
 ```
 
-terminal shortcut:  system-settings -> keyboard -> shortcuts, assign F1 to launch terminal
+terminal shortcut:  settings -> keyboard -> view and customize shortcuts
 
-Run `gnome-tweak-tool`:
+   select "custom shortcuts", and add one for `gnome-terminal` assigned to F1
 
-* extensions: turn on window list
+Run `gnome-tweaks`:
 
 * fonts:
   * hinting: full
   * antialiasing: subpixel
-  * set monospace font to Inconsolata
+  * set monospace font to Inconsolata Medium / 11 pt
 
 * topbar: turn on date
 
-* windows:
+* window titlebars:
+  * turn on maximize and minimize
+
+* windows
   * edge-tiling: off (this prevents window from maximizing when it hits the top of the screen)
   * focus is secondary click
-  * turn on maximize and minimize
+
+### Extensions
+
+```
+dnf install gnome-extensions-app
+```
+
+then run "extensions" via the software search
+
+* extensions: turn on window list
+
+
+
 
 ### connector
 
@@ -709,7 +728,7 @@ dnf system-upgrade log
 you might need to specify a number, like:
 ```
 dnf system-upgrade log --number 2
-
+```
 
 # laptop battery
 
