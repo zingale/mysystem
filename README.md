@@ -15,6 +15,12 @@ dnf update
 dnf install emacs
 ```
 
+## hostname
+
+```
+hostnamectl set-hostname new-name
+``` 
+
 ## show grub menu (it is hidden by default)
 
 ```
@@ -114,6 +120,7 @@ pip.
 dnf install python3-scipy ipython3 python3-matplotlib python3-sympy
 dnf install python3-f2py python3-Cython python3-h5py
 dnf install python3-pylint python3-pyflakes
+dnf install python3-ipython-sphinx
 ```
 
 ```
@@ -675,7 +682,7 @@ boot).
 The test page should appear
 
 
-# Nameserver
+## Nameserver
 
 If the nameserver is not working do:
 
@@ -684,9 +691,9 @@ systemctl restart systemd-resolved
 ```
 
 
-# Handy commands
+## Handy commands
 
-## Debugging services
+### Debugging services
 
 List failed services:
 ```
@@ -698,7 +705,7 @@ What's happening with startup:
 systemd-analyze critical-chain
 ```
 
-# Libreoffice
+## Libreoffice
 
 Turn off "use background cache":
 
@@ -707,7 +714,7 @@ Tools->options->LibreOffice Impress-> General,
 supposed to help with flickering.
 
 
-# wacom
+## wacom
 
 Plugged in and it was recognized as "android touchpad" in the settings
 panel for it.  Following hints online, I held down the first and last
@@ -730,19 +737,19 @@ you might need to specify a number, like:
 dnf system-upgrade log --number 2
 ```
 
-# laptop battery
+## laptop battery
 
 ```
 dnf install tlp tlp-rdw
 systemctl enable tlp.service
 ```
 
-# firmware updates
+## firmware updates
 
 Firmware updates are handled by gnome-software.  This frequently fails
 to refresh.  Do the following:
 
-# gnome software
+## gnome software
 
 ```
 killall gnome-software
@@ -750,7 +757,7 @@ rm -rf ~/.cache/gnome-software
 ```
 
 
-# Zoom
+## Zoom
 
 Hack to get Zoom working with GNOME 41 + Wayland:
 
@@ -760,7 +767,7 @@ Hack to get Zoom working with GNOME 41 + Wayland:
 
 see this thread: https://community.zoom.com/t5/Meetings/Wayland-screen-sharing-broken-with-GNOME-41-on-Fedora-35/m-p/22539
 
-# Zotero
+## Zotero
 
 download from: https://www.zotero.org/download/
 
@@ -772,10 +779,11 @@ move the full directory into ~/system and do a symlink f `zotero` into
 
 also install the chrome zotero connector extension
 
-# Cosair keyboard
+## Cosair keyboard
 
 ```
 dnf install ckb-next
 ```
 
 run `ckb-next`
+
