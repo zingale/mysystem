@@ -759,3 +759,23 @@ Hack to get Zoom working with GNOME 41 + Wayland:
 3. enter `global.context.unsafe_mode=true`
 
 see this thread: https://community.zoom.com/t5/Meetings/Wayland-screen-sharing-broken-with-GNOME-41-on-Fedora-35/m-p/22539
+
+# Zotero
+
+download from: https://www.zotero.org/download/
+
+```
+tar xf Zotero-5.0.96.3_linux-x86_64.tar.bz2
+
+move the full directory into ~/system and do a symlink f `zotero` into
+`~/bin`
+
+also install the chrome zotero connector extension
+
+# Cosair keyboard
+
+```
+dnf install ckb-next
+```
+
+run `ckb-next`
