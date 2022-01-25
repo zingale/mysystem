@@ -726,7 +726,7 @@ I am using it in relative mode and it works great with Xournal++::
   dnf install xournalpp
 
 
-# system upgrades
+## system upgrades
 
 If a system upgrade doesn't take do:
 ```
