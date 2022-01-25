@@ -773,6 +773,7 @@ download from: https://www.zotero.org/download/
 
 ```
 tar xf Zotero-5.0.96.3_linux-x86_64.tar.bz2
+```
 
 move the full directory into ~/system and do a symlink f `zotero` into
 `~/bin`
