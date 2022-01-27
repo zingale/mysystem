@@ -217,7 +217,7 @@ dnf install libasan libubsan
 Useful tools:
 
 ```
-dnf install screen xxdiff ack
+dnf install screen ack
 ```
 
 MPI:
@@ -232,6 +232,14 @@ BLAS
 dnf install openblas openblas-devel
 ```
 
+### xxdiff
+
+```
+wget https://kojipkgs.fedoraproject.org//vol/fedora_koji_archive04/packages/xxdiff/4.0.1/10.fc31/src/xxdiff-4.0.1-10.fc31.src.rpm
+sudo dnf install rpm-build flex bison qt-devel
+rpmbuild --rebuild xxdiff-4.0.1-10.fc31.src.rpm
+sudo dnf install /home/zingale/rpmbuild/RPMS/x86_64/xxdiff-4.0.1-10.fc35.x86_64.rpm
+```
 
 ## Other Useful Packages
 
