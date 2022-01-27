@@ -196,6 +196,7 @@ dnf install 'tex(ly1enc.def)'
 dnf install 'tex(inconsolata.sty)'
 dnf install 'tex(cantarell.sty)'
 dnf install texlive-revtex
+dnf install pdfmerge
 ```
 
 Also useful for publishing:
