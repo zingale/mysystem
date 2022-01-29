@@ -797,3 +797,47 @@ dnf install ckb-next
 
 run `ckb-next`
 
+## dyndns
+
+```
+dnf install ddclient
+```
+
+then edit `/etc/ddclient.conf`.  It should have in particular:
+
+```
+protocol=dyndns2
+use=web
+login=mylogin
+password=mypassword
+myhost.dyndns.org
+```
+
+then test it:
+```
+ddclient -daemon=0 -debug -verbose -noquiet
+```
+
+now set it to start automatically:
+```
+systemctl enable ddclient.service
+systemctl start ddclient.service
+```
+
+The `start` will likely fail.  Look at the log:
+```
+journalctl -xeu ddclient.service
+```
+
+it'll probably say something like:
+```
+Jan 29 12:19:28 loons touch[258877]: /bin/touch: cannot touch '/var/cache/ddclient/ddclient.cache': Permission denied
+```
+
+you need to change the permissions on that file:
+```
+chown ddclient:ddclient /var/cache/ddclient/ddclient.cache
+```
+
+see: https://mgw.dumatics.com/ddclient-on-fedora-2/ (but those instructions are a bit off)
+
