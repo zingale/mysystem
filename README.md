@@ -15,6 +15,12 @@ dnf update
 dnf install emacs
 ```
 
+## hostname
+
+```
+hostnamectl set-hostname new-name
+``` 
+
 ## show grub menu (it is hidden by default)
 
 ```
@@ -114,6 +120,7 @@ pip.
 dnf install python3-scipy ipython3 python3-matplotlib python3-sympy
 dnf install python3-f2py python3-Cython python3-h5py
 dnf install python3-pylint python3-pyflakes
+dnf install python3-ipython-sphinx
 ```
 
 ```
@@ -151,7 +158,11 @@ pip3 install numpydoc --user
 pip3 install sphinx_rtd_theme --user
 pip3 install sphinxcontrib-bibtex --user
 pip3 install breathe --user
+pip3 install sphinx-copybutton --user
+pip3 install sphinx-prompt --user
+```
 
+```
 dnf install pandoc
 ```
 
@@ -185,6 +196,7 @@ dnf install 'tex(ly1enc.def)'
 dnf install 'tex(inconsolata.sty)'
 dnf install 'tex(cantarell.sty)'
 dnf install texlive-revtex
+dnf install pdfmerge
 ```
 
 Also useful for publishing:
@@ -205,7 +217,7 @@ dnf install libasan libubsan
 Useful tools:
 
 ```
-dnf install screen xxdiff ack
+dnf install screen ack
 ```
 
 MPI:
@@ -220,6 +232,14 @@ BLAS
 dnf install openblas openblas-devel
 ```
 
+### xxdiff
+
+```
+wget https://kojipkgs.fedoraproject.org//vol/fedora_koji_archive04/packages/xxdiff/4.0.1/10.fc31/src/xxdiff-4.0.1-10.fc31.src.rpm
+sudo dnf install rpm-build flex bison qt-devel
+rpmbuild --rebuild xxdiff-4.0.1-10.fc31.src.rpm
+sudo dnf install /home/zingale/rpmbuild/RPMS/x86_64/xxdiff-4.0.1-10.fc35.x86_64.rpm
+```
 
 ## Other Useful Packages
 
@@ -229,33 +249,48 @@ dnf install stellarium gnuplot
 dnf install motif motif-devel
 dnf install libXpm libXpm-devel
 dnf install lyx-fonts
-dnf install keepass
+dnf install keepassx
 ```
 
 
 ## GNOME
 
 ```
-dnf install gnome-tweak-tool levien-inconsolata-fonts
+dnf install gnome-tweaks levien-inconsolata-fonts
 ```
 
-terminal shortcut:  system-settings -> keyboard -> shortcuts, assign F1 to launch terminal
+terminal shortcut:  settings -> keyboard -> view and customize shortcuts
 
-Run `gnome-tweak-tool`:
+   select "custom shortcuts", and add one for `gnome-terminal` assigned to F1
 
-* extensions: turn on window list
+Run `gnome-tweaks`:
 
 * fonts:
   * hinting: full
   * antialiasing: subpixel
-  * set monospace font to Inconsolata
+  * set monospace font to Inconsolata Medium / 11 pt
 
 * topbar: turn on date
 
-* windows:
+* window titlebars:
+  * turn on maximize and minimize
+
+* windows
   * edge-tiling: off (this prevents window from maximizing when it hits the top of the screen)
   * focus is secondary click
-  * turn on maximize and minimize
+
+### Extensions
+
+```
+dnf install gnome-extensions-app
+```
+
+then run "extensions" via the software search
+
+* extensions: turn on window list
+
+
+
 
 ### connector
 
@@ -656,10 +691,18 @@ boot).
 The test page should appear
 
 
+## Nameserver
 
-# Handy commands
+If the nameserver is not working do:
 
-## Debugging services
+```
+systemctl restart systemd-resolved
+```
+
+
+## Handy commands
+
+### Debugging services
 
 List failed services:
 ```
@@ -671,7 +714,7 @@ What's happening with startup:
 systemd-analyze critical-chain
 ```
 
-# Libreoffice
+## Libreoffice
 
 Turn off "use background cache":
 
@@ -680,7 +723,7 @@ Tools->options->LibreOffice Impress-> General,
 supposed to help with flickering.
 
 
-# wacom
+## wacom
 
 Plugged in and it was recognized as "android touchpad" in the settings
 panel for it.  Following hints online, I held down the first and last
@@ -692,7 +735,7 @@ I am using it in relative mode and it works great with Xournal++::
   dnf install xournalpp
 
 
-# system upgrades
+## system upgrades
 
 If a system upgrade doesn't take do:
 ```
@@ -701,25 +744,100 @@ dnf system-upgrade log
 you might need to specify a number, like:
 ```
 dnf system-upgrade log --number 2
+```
 
-
-# laptop battery
+## laptop battery
 
 ```
 dnf install tlp tlp-rdw
 systemctl enable tlp.service
 ```
 
-# firmware updates
+## firmware updates
 
 Firmware updates are handled by gnome-software.  This frequently fails
 to refresh.  Do the following:
 
-# gnome software
+## gnome software
 
 ```
 killall gnome-software
 rm -rf ~/.cache/gnome-software
 ```
 
+
+## Zoom
+
+Hack to get Zoom working with GNOME 41 + Wayland:
+
+1. press ALT+F2
+2. enter `lg`
+3. enter `global.context.unsafe_mode=true`
+
+see this thread: https://community.zoom.com/t5/Meetings/Wayland-screen-sharing-broken-with-GNOME-41-on-Fedora-35/m-p/22539
+
+## Zotero
+
+download from: https://www.zotero.org/download/
+
+```
+tar xf Zotero-5.0.96.3_linux-x86_64.tar.bz2
+```
+
+move the full directory into ~/system and do a symlink f `zotero` into
+`~/bin`
+
+also install the chrome zotero connector extension
+
+## Cosair keyboard
+
+```
+dnf install ckb-next
+```
+
+run `ckb-next`
+
+## dyndns
+
+```
+dnf install ddclient
+```
+
+then edit `/etc/ddclient.conf`.  It should have in particular:
+
+```
+protocol=dyndns2
+use=web
+login=mylogin
+password=mypassword
+myhost.dyndns.org
+```
+
+then test it:
+```
+ddclient -daemon=0 -debug -verbose -noquiet
+```
+
+now set it to start automatically:
+```
+systemctl enable ddclient.service
+systemctl start ddclient.service
+```
+
+The `start` will likely fail.  Look at the log:
+```
+journalctl -xeu ddclient.service
+```
+
+it'll probably say something like:
+```
+Jan 29 12:19:28 loons touch[258877]: /bin/touch: cannot touch '/var/cache/ddclient/ddclient.cache': Permission denied
+```
+
+you need to change the permissions on that file:
+```
+chown ddclient:ddclient /var/cache/ddclient/ddclient.cache
+```
+
+see: https://mgw.dumatics.com/ddclient-on-fedora-2/ (but those instructions are a bit off)
 
