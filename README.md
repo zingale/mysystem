@@ -841,3 +841,23 @@ chown ddclient:ddclient /var/cache/ddclient/ddclient.cache
 
 see: https://mgw.dumatics.com/ddclient-on-fedora-2/ (but those instructions are a bit off)
 
+
+## dnf update issues
+
+If dnf crashes while updating.  Check for dupes:
+
+```
+dnf repoquery --duplicated
+```
+
+then remove:
+
+```
+dnf remove --duplicates
+```
+
+and run a check:
+
+```
+dnf check
+```
