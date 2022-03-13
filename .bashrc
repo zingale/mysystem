@@ -25,7 +25,7 @@ alias screenkill="screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | 
 
 # use bat instead of cat
 a=$(which bat >& /dev/null); if [ $? == 0 ]; then
-    alias cat="bat"
+    alias cat='bat --map-syntax="*.H:C++"'
 fi
 
 
