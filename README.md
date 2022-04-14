@@ -871,3 +871,12 @@ following: https://linuxhint.com/install-adobe-reader-fedora-linux/
 dnf install snapd
 snap install acrordrdc
 ```
+
+Note that you can only store to `drive_c` and this is located in
+`~/snap/acrordrdc/common/.wine/drive_c/`
+
+but also see this:
+
+https://askubuntu.com/questions/859916/is-it-possible-to-open-a-pdf-that-requires-adobe-reader-8-without-using-acroread
+
+it seems that firefox can open these PDFs (which are XFA files) natively.
