@@ -861,3 +861,13 @@ and run a check:
 ```
 dnf check
 ```
+
+
+## Adobe Reader
+
+following: https://linuxhint.com/install-adobe-reader-fedora-linux/
+
+```
+dnf install snapd
+snap install acrordrdc
+```
