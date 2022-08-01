@@ -162,3 +162,8 @@
 
 ;; python
 (add-hook 'python-mode-hook 'flycheck-mode)
+
+;; C+
+(add-hook 'c++-mode-hook 'flycheck-mode)
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++17")))
+
