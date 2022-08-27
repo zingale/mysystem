@@ -1,6 +1,6 @@
 # Fedora Configuration Notes
 
-updated for Fedora 33
+updated for Fedora 36
 
 ## change root password
 
@@ -880,3 +880,18 @@ but also see this:
 https://askubuntu.com/questions/859916/is-it-possible-to-open-a-pdf-that-requires-adobe-reader-8-without-using-acroread
 
 it seems that firefox can open these PDFs (which are XFA files) natively.
+
+
+## IPMI
+
+see https://helpdesk.kaseya.com/hc/en-gb/articles/4407525127697-IPMI-disabling-IPMI-LAN-for-DHCP
+
+you can check the status of the system's IPMI config via:
+
+```
+ipmiutil lan -c
+```
+
+It is recommended that you set things up as static with the IP address
+set to `0.0.0.0` to disable.
+
