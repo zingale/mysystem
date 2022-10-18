@@ -1,6 +1,6 @@
 # Fedora Configuration Notes
 
-updated for Fedora 33
+updated for Fedora 36
 
 ## change root password
 
@@ -12,7 +12,7 @@ sudo passwd root
 
 ```
 dnf update
-dnf install emacs
+dnf install emacs emacs-flycheck
 ```
 
 ## hostname
@@ -840,4 +840,58 @@ chown ddclient:ddclient /var/cache/ddclient/ddclient.cache
 ```
 
 see: https://mgw.dumatics.com/ddclient-on-fedora-2/ (but those instructions are a bit off)
+
+
+## dnf update issues
+
+If dnf crashes while updating.  Check for dupes:
+
+```
+dnf repoquery --duplicated
+```
+
+then remove:
+
+```
+dnf remove --duplicates
+```
+
+and run a check:
+
+```
+dnf check
+```
+
+
+## Adobe Reader
+
+following: https://linuxhint.com/install-adobe-reader-fedora-linux/
+
+```
+dnf install snapd
+snap install acrordrdc
+```
+
+Note that you can only store to `drive_c` and this is located in
+`~/snap/acrordrdc/common/.wine/drive_c/`
+
+but also see this:
+
+https://askubuntu.com/questions/859916/is-it-possible-to-open-a-pdf-that-requires-adobe-reader-8-without-using-acroread
+
+it seems that firefox can open these PDFs (which are XFA files) natively.
+
+
+## IPMI
+
+see https://helpdesk.kaseya.com/hc/en-gb/articles/4407525127697-IPMI-disabling-IPMI-LAN-for-DHCP
+
+you can check the status of the system's IPMI config via:
+
+```
+ipmiutil lan -c
+```
+
+It is recommended that you set things up as static with the IP address
+set to `0.0.0.0` to disable.
 

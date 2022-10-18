@@ -23,6 +23,12 @@ export EDITOR="emacs -nw"
 
 alias screenkill="screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs kill"
 
+# use bat instead of cat
+a=$(which bat >& /dev/null); if [ $? == 0 ]; then
+    alias cat='bat --map-syntax="*.H:C++"'
+fi
+
+
 # MPI/gfortran stuff
 export GFORTRAN_UNBUFFERED_ALL=1
 

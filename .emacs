@@ -1,4 +1,3 @@
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -159,3 +158,12 @@
 
 ;; window tab line
 (global-tab-line-mode 1)
+
+
+;; python
+(add-hook 'python-mode-hook 'flycheck-mode)
+
+;; C+
+(add-hook 'c++-mode-hook 'flycheck-mode)
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++17")))
+
