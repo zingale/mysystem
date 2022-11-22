@@ -115,6 +115,10 @@ if [ $hostname == "groot.astro.sunysb.edu" ]; then
     export HYPRE_DIR=/opt/hypre/hypre-2.23
 fi
 
+if [ $hostname == "ahsoka.astro.sunysb.edu" ]; then
+    # HYPRE
+    export HYPRE_DIR=/opt/hypre/
+fi
 
 if [ $hostname == "inf.astro.sunysb.edu" ]; then
     # PGI
