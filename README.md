@@ -240,11 +240,20 @@ dnf install clang-tools-extra
 
 ### xxdiff
 
+download the source here: https://github.com/blais/xxdiff
+
+some additional packages are needed:
+
 ```
-wget https://kojipkgs.fedoraproject.org//vol/fedora_koji_archive04/packages/xxdiff/4.0.1/10.fc31/src/xxdiff-4.0.1-10.fc31.src.rpm
-sudo dnf install rpm-build flex bison qt-devel
-rpmbuild --rebuild xxdiff-4.0.1-10.fc31.src.rpm
-sudo dnf install /home/zingale/rpmbuild/RPMS/x86_64/xxdiff-4.0.1-10.fc35.x86_64.rpm
+dnf install qt6-qtbase-devel
+```
+
+then
+
+```
+cd xxdiff/src
+make -f Makefile.bootstrap
+make
 ```
 
 ## Other Useful Packages
@@ -255,7 +264,7 @@ dnf install stellarium gnuplot
 dnf install motif motif-devel
 dnf install libXpm libXpm-devel
 dnf install lyx-fonts
-dnf install keepassx
+dnf install keepassxc
 ```
 
 
@@ -297,13 +306,6 @@ then run "extensions" via the software search
 
 
 
-
-### connector
-
-```
-dnf install chrome-gnome-shell
-```
-
 ### sound selector:
 
 https://extensions.gnome.org/extension/906/sound-output-device-chooser/
@@ -316,7 +318,7 @@ https://extensions.gnome.org/extension/906/sound-output-device-chooser/
 Enable rpmfusion:
 
 ```
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 ```
 
 disable the rpmfusion-nonfree.repo and rpmfusion-nonfree-updates.repo
