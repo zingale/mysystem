@@ -232,6 +232,12 @@ BLAS
 dnf install openblas openblas-devel
 ```
 
+Clang-Tidy
+
+```
+dnf install clang-tools-extra
+```
+
 ### xxdiff
 
 ```
