@@ -167,3 +167,4 @@
 (add-hook 'c++-mode-hook 'flycheck-mode)
 (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++17")))
 
+(put 'upcase-region 'disabled nil)
