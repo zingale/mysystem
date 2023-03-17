@@ -101,20 +101,24 @@ hostname=`uname -n`
 if [ $hostname == "bender.astro.sunysb.edu" ]; then
     # PGI
     # CUDA
-    export CUDA_PATH=/usr/local/cuda-11.4
+    export CUDA_PATH=/usr/local/cuda-11.7
     export PATH=$CUDA_PATH/bin:$PATH
 fi
 
 if [ $hostname == "groot.astro.sunysb.edu" ]; then
 
     # CUDA
-    export CUDA_PATH=/usr/local/cuda-11.5
+    export CUDA_PATH=/usr/local/cuda-11.8
     export PATH=$CUDA_PATH/bin:$PATH
 
     # HYPRE
     export HYPRE_DIR=/opt/hypre/hypre-2.23
 fi
 
+if [ $hostname == "ahsoka.astro.sunysb.edu" ]; then
+    # HYPRE
+    export HYPRE_DIR=/opt/hypre/
+fi
 
 if [ $hostname == "inf.astro.sunysb.edu" ]; then
     # PGI
