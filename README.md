@@ -492,6 +492,15 @@ dnf install mailx
 
 (mailx provides the `mail` command)
 
+Note: for Rocky Linux 9, do
+
+```
+dnf install s-nail
+```
+
+instead of `mailx`
+
+
 See this: https://docs.fedoraproject.org/en-US/fedora/f28/system-administrators-guide/servers/Mail_Servers/index.html
 
 > The default /etc/postfix/main.cf file does not allow Postfix to
