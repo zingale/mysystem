@@ -209,7 +209,7 @@ dnf install gv enscript netpbm-progs
 ## Developing
 
 ```
-dnf install gcc-gfortran gcc-c++ redhat-rpm-config make
+dnf install gcc-gfortran gcc-c++ redhat-rpm-config make ccache
 dnf install valgrind
 dnf install libasan libubsan
 ```
