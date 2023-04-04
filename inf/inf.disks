@@ -1,0 +1,19 @@
+NAME                            MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
+sda                               8:0    0   3.6T  0 disk  
+└─sda1                            8:1    0   3.6T  0 part  
+  └─md0                           9:0    0   3.6T  0 raid1 /raid
+sdb                               8:16   0   3.6T  0 disk  
+└─sdb1                            8:17   0   3.6T  0 part  
+  └─md0                           9:0    0   3.6T  0 raid1 /raid
+sdc                               8:32   0   1.8T  0 disk  
+└─sdc1                            8:33   0   1.8T  0 part  /scratch
+sdd                               8:48   0   3.6T  0 disk  
+└─sdd1                            8:49   0   3.6T  0 part  /data
+zram0                           252:0    0     8G  0 disk  [SWAP]
+nvme0n1                         259:0    0 465.8G  0 disk  
+├─nvme0n1p1                     259:1    0   600M  0 part  /boot/efi
+├─nvme0n1p2                     259:2    0     1G  0 part  /boot
+└─nvme0n1p3                     259:3    0 464.2G  0 part  
+  ├─fedora_localhost--live-root 253:0    0    70G  0 lvm   /
+  ├─fedora_localhost--live-swap 253:1    0  31.4G  0 lvm   [SWAP]
+  └─fedora_localhost--live-home 253:2    0 362.8G  0 lvm   /home

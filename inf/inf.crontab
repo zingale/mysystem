@@ -1,0 +1,4 @@
+00 04 * * * /home/zingale/bin/lazy_astroph.py -w /home/zingale/.slack.webhook -m michael.zingale@stonybrook.edu /home/zingale/bin/inputs.lazy_astroph > lazy_astroph.out
+00 01 * * 0 /home/zingale/bin/backup-machine.py /home/zingale/bin/inf-backup.ini
+00 04 * * * /home/zingale/bin/cites.sh
+
