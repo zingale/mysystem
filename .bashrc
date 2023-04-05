@@ -101,7 +101,7 @@ hostname=`uname -n`
 if [ $hostname == "bender.astro.sunysb.edu" ]; then
     # PGI
     # CUDA
-    export CUDA_PATH=/usr/local/cuda-11.7
+    export CUDA_PATH=/usr/local/cuda-12.1
     export PATH=$CUDA_PATH/bin:$PATH
 fi
 
