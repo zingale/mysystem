@@ -12,7 +12,7 @@ sudo passwd root
 
 ```
 dnf update
-dnf install emacs emacs-flycheck
+dnf install emacs emacs-flycheck emacs-yaml-mode
 ```
 
 ## hostname
