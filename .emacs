@@ -163,13 +163,14 @@
 ;; python
 (add-hook 'python-mode-hook 'flycheck-mode)
 
-;;; automatically isort python
-(add-to-list 'load-path "~/mysystem")
-(require 'py-isort)
-(add-hook 'before-save-hook 'py-isort-before-save)
 
 ;; C+
 (add-hook 'c++-mode-hook 'flycheck-mode)
 (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++17")))
 
 (put 'upcase-region 'disabled nil)
+
+;; editorconfig
+(add-to-list 'load-path "~/mysystem/editorconfig-20230919.2101/")
+(require 'editorconfig)
+(editorconfig-mode 1)
