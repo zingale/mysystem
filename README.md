@@ -907,3 +907,26 @@ ipmiutil lan -c
 It is recommended that you set things up as static with the IP address
 set to `0.0.0.0` to disable.
 
+
+## Suspend
+
+Fedora 38 now automatically suspends when on AC power after 15 minutes.  This is a
+setting on GNOME.
+
+Here's how to see the setting:
+
+```
+sudo -u gdm dbus-run-session gsettings list-recursively org.gnome.settings-daemon.plugins.power | grep sleep
+```
+
+here's how to disable it:
+
+```
+gdm dbus-run-session gsettings list-recursively org.gnome.settings-daemon.plugins.power
+```
+
+see:
+
+https://www.reddit.com/r/Fedora/comments/15i5wcg/fedora_38_cant_disable_sleepsuspend/
+
+
