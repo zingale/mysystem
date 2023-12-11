@@ -28,5 +28,5 @@
 [init]
 	defaultBranch = main
 
-[use]
-	name = Michael Zingale
+[credential]
+	helper = cache --timeout 3600
