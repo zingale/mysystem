@@ -42,9 +42,9 @@ export BOXLIB_USE_MPI_WRAPPERS=1
 export INITIAL_MODEL_HOME=/home/zingale/development/initial_models/
 
 if [ -e /home/zingale/development/AMReX/ ]; then
-    export AMREX_HOME=/home/zingale/development/AMReX/
+    export AMREX_HOME=/home/zingale/development/AMReX
 else
-    export AMREX_HOME=/home/zingale/development/amrex/
+    export AMREX_HOME=/home/zingale/development/amrex
 fi
 
 # Castro stuff
