@@ -28,20 +28,6 @@ a=$(which bat >& /dev/null); if [ $? == 0 ]; then
     alias cat='bat --map-syntax="*.H:C++"'
 fi
 
-
-# MPI/gfortran stuff
-export GFORTRAN_UNBUFFERED_ALL=1
-
-# BoxLib python
-if [ -e /usr/local/BoxLib ]; then
-    export PYTHONPATH=/usr/local/BoxLib
-    export PATH=/usr/local/BoxLib:$PATH
-fi
-export PYTHONPATH=/home/zingale/development/AmrPostprocessing/python:$PYTHONPATH
-export PATH=/home/zingale/development/AmrPostprocessing/python:$PATH
-
-export PYTHONPATH=/home/zingale/development/Microphysics/python_library:$PYTHONPATH
-
 # Microphysics
 export MICROPHYSICS_HOME=/home/zingale/development/Microphysics
 
@@ -66,16 +52,7 @@ export CASTRO_HOME=/home/zingale/development/Castro
 export WDMERGER_HOME=/home/zingale/development/wdmerger
 
 # plotting numerical exercises
-export PYTHONPATH="$PYTHONPATH:/home/zingale/classes/numerical_exercises/:/home/zingale/development/pyro2/:/home/zingale/classes/astro_animations"
-
-# visit
-#export PATH="/usr/local/visit/bin:${PATH}"
-
-# pyro
-export PYRO_HOME=/home/zingale/development/pyro2/
-
-# pynucastro
-export PYTHONPATH="$PYTHONPATH:/home/zingale/development/pynucastro"
+export PYTHONPATH="$PYTHONPATH:/home/zingale/classes/numerical_exercises/:/home/zingale/classes/astro_animations"
 
 # prompt -- this gets the git branch in the prompt
 # we also use some coloring.  Note that we need to put the 
@@ -101,14 +78,14 @@ hostname=`uname -n`
 if [ $hostname == "bender.astro.sunysb.edu" ]; then
     # PGI
     # CUDA
-    export CUDA_PATH=/usr/local/cuda-11.7
+    export CUDA_PATH=/usr/local/cuda-12.1
     export PATH=$CUDA_PATH/bin:$PATH
 fi
 
 if [ $hostname == "groot.astro.sunysb.edu" ]; then
 
     # CUDA
-    export CUDA_PATH=/usr/local/cuda-11.8
+    export CUDA_PATH=/usr/local/cuda-12.1
     export PATH=$CUDA_PATH/bin:$PATH
 
     # HYPRE
@@ -118,22 +95,6 @@ fi
 if [ $hostname == "ahsoka.astro.sunysb.edu" ]; then
     # HYPRE
     export HYPRE_DIR=/opt/hypre/
-fi
-
-if [ $hostname == "inf.astro.sunysb.edu" ]; then
-    # PGI
-    export PGI=/opt/pgi;
-    export PATH=/opt/pgi/linux86-64/18.10/bin:$PATH;
-    export MANPATH=$MANPATH:/opt/pgi/linux86-64/18.10/man;
-    export LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/pgi/license.dat; 
-
-    # CUDA
-    #export CUDA_PATH=/usr/local/cuda-9.2
-    #export PATH=$CUDA_PATH/bin:$PATH
-
-    # HYPRE
-    export HYPRE_DIR=/opt/hypre/hypre-2.18
-
 fi
 
 

@@ -84,6 +84,12 @@
 ; just spaces
 (setq-default indent-tabs-mode nil)
 
+; C++ seems to override the default tabs.  See
+; https://emacs.stackexchange.com/questions/12173/confusion-by-the-usage-of-indent-tabs-mode-nil
+
+(defun endless/c-hook ()
+  (setq indent-tabs-mode nil))
+(add-hook 'c++-mode-hook #'endless/c-hook)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -163,7 +169,18 @@
 ;; python
 (add-hook 'python-mode-hook 'flycheck-mode)
 
+
 ;; C+
 (add-hook 'c++-mode-hook 'flycheck-mode)
 (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++17")))
+
+(put 'upcase-region 'disabled nil)
+
+;; editorconfig
+(add-to-list 'load-path "~/mysystem/editorconfig-20230919.2101/")
+(require 'editorconfig)
+(editorconfig-mode 1)
+
+;; company-mode (autocomplete)
+(add-hook 'after-init-hook 'global-company-mode)
 

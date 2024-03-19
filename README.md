@@ -12,7 +12,7 @@ sudo passwd root
 
 ```
 dnf update
-dnf install emacs emacs-flycheck
+dnf install emacs emacs-flycheck emacs-yaml-mode
 ```
 
 ## hostname
@@ -28,6 +28,25 @@ grub2-editenv - unset menu_auto_hide
 ```
 
 (see https://hansdegoede.livejournal.com/19081.html, https://fedoraproject.org/wiki/Changes/HiddenGrubMenu )
+
+## fix GNOME suspend
+
+GNOME enters suspend after 15 minutes of inactivity even when plugged
+in.
+
+see: https://discussion.fedoraproject.org/t/gnome-suspends-after-15-minutes-of-user-inactivity-even-on-ac-power/79801
+
+display current sleep status:
+
+```
+sudo -u gdm dbus-run-session gsettings list-recursively org.gnome.settings-daemon.plugins.power | grep sleep
+```
+
+change plugged in delay to 0 to disable suspend:
+
+```
+sudo -u gdm dbus-run-session gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
+```
 
 ## change root prompt
 
@@ -209,7 +228,8 @@ dnf install gv enscript netpbm-progs
 ## Developing
 
 ```
-dnf install gcc-gfortran gcc-c++ redhat-rpm-config make
+dnf install gcc-gfortran gcc-c++ redhat-rpm-config make ccache
+dnf install clang-tools-extra
 dnf install valgrind
 dnf install libasan libubsan
 ```
@@ -497,6 +517,15 @@ dnf install mailx
 ```
 
 (mailx provides the `mail` command)
+
+Note: for Rocky Linux 9, do
+
+```
+dnf install s-nail
+```
+
+instead of `mailx`
+
 
 See this: https://docs.fedoraproject.org/en-US/fedora/f28/system-administrators-guide/servers/Mail_Servers/index.html
 

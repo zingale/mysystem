@@ -1,4 +1,4 @@
-### GCC 7
+### GCC 11.3
 
 The above will get the PGI compilers working with MPI, but not with
 CUDA, since CUDA 10.0 does not support GCC 8.x.  To fix this we need
@@ -8,30 +8,30 @@ compilers to use with PGI/CUDA.
 1. get the source
 
    ```
-   wget http://www.netgull.com/gcc/releases/gcc-8.3.0/gcc-8.3.0.tar.gz
+   wget https://bigsearcher.com/mirrors/gcc/releases/gcc-11.3.0/gcc-11.3.0.tar.gz
    ```
 
 2. untar:
 
    ```
-   tar xf gcc-8.3.0.tar.gz
+   tar xf gcc-11.3.0.tar.gz
    ```
 
 3. get the needed packages
 
    ```
-   cd gcc-8.3.0/
+   cd gcc-11.3.0/
    ./contrib/download_prerequisites
    ```
 
 4. make it
 
-   in top dir (above gcc-8.3.0)
+   in top dir (above gcc-11.3.0)
 
    ```
    mkdir objdir
    cd objdir
-   ../gcc-8.3.0/configure --prefix=/opt/gcc/gcc-8.3 --enable-languages=c,c++,fortran --disable-multilib --disable-libsanitizer
+   ../gcc-11.3.0/configure --prefix=/opt/gcc/gcc-11.3 --enable-languages=c,c++,fortran --disable-multilib --disable-libsanitizer
 
    make -j 16
    ```
@@ -39,7 +39,7 @@ compilers to use with PGI/CUDA.
 5. as root:
 
    ```
-   mkdir /opt/gcc/gcc-8.3
+   mkdir /opt/gcc/gcc-11.3
    make install
    ```
 
@@ -53,19 +53,19 @@ in `/etc/modulefiles/gcc`, add `8.3`:
 ##
 ## modules gcc8.3
 ##
-## modulefiles/gcc-8.3
+## modulefiles/gcc-11.3
 ##
 proc ModulesHelp { } {
         global version modroot
 
-        puts stderr "gcc/8.3 - sets the Environment for GCC 9.3"
+        puts stderr "gcc/11.3 - sets the Environment for GCC 11.3"
 }
 
-module-whatis   "Sets the environment for using gcc-8.3.0 compilers (C, C++, Fortran)"
+module-whatis   "Sets the environment for using gcc-11.3.0 compilers (C, C++, Fortran)"
 
 # for Tcl script use only
-set     topdir          /opt/gcc/gcc-8.3
-set     version         8.3
+set     topdir          /opt/gcc/gcc-11.3
+set     version         11.3
 #set     sys             linux86
 
 setenv          CC              $topdir/bin/gcc
@@ -80,4 +80,4 @@ prepend-path    MANPATH         $topdir/man
 prepend-path    LD_LIBRARY_PATH $topdir/lib64
 ```
 
-now we can `module load gcc/8.3` to use these compilers.
+now we can `module load gcc/11.3` to use these compilers.
