@@ -1,0 +1,17 @@
+palette               /home/zingale/development/Amrvis/viridis.pal
+initialderived        density
+initialscale          1
+numberformat          %10.3e
+maxpixmapsize         1000000
+reservesystemcolors   38
+reservesystemcolors   24
+reservesystemcolors   34
+reservesystemcolors   0
+extrapalettewidth     0
+showboxes             TRUE
+windowheight          750
+windowwidth           900
+filetype              newplt
+datasetinitialcolor   true
+lowblack
+cliptoppalette
