@@ -31,16 +31,10 @@ fi
 # Microphysics
 export MICROPHYSICS_HOME=/home/zingale/development/Microphysics
 
-# Maestro
-export MAESTRO_HOME=/home/zingale/development/MAESTRO
-
-# AMReX / BoxLib
-export FBOXLIB_HOME=/home/zingale/development/FBoxLib/
-export BOXLIB_USE_MPI_WRAPPERS=1
-
 # initial models
 export INITIAL_MODEL_HOME=/home/zingale/development/initial_models/
 
+# AMReX
 if [ -e /home/zingale/development/AMReX/ ]; then
     export AMREX_HOME=/home/zingale/development/AMReX
 else
