@@ -110,6 +110,18 @@
 
 (show-paren-mode 1)
 
+; use C-c p to jump between matching parens
+; see https://stackoverflow.com/questions/9454489/emacs-brace-and-bracket-highlighting
+
+(defun goto-matching-paren ()
+  "If point is sitting on a parenthetic character, jump to its match."
+  (interactive)
+  (cond ((looking-at "\\s\(") (forward-list 1))
+        ((progn
+           (backward-char 1)
+           (looking-at "\\s\)")) (forward-char 1) (backward-list 1))))
+(define-key global-map [(control ?c) ?p] 'goto-matching-paren) ; Bind to C-c p
+
 ;; rainbow paranthesis
 (load "~/mysystem/rainbow-delimiters.el")
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
