@@ -78,12 +78,14 @@ else
     PS1='\n'
     # normal user
     if [[ -n $SSH_CLIENT ]]; then
-        PS1+='\[${WHITE_FG}\]\[${MAG_BG}\]'
+        USE_BG=${MAG_BG}
     else
-        PS1+='\[${WHITE_FG}\]\[${BLUE_BG}\]'
+        USE_BG=${BLUE_BG}
     fi
+    PS1+='\[${WHITE_FG}\]\[${USE_BG}\]'
 
-    PS1+='\h \[${GREEN_BG}\]\[${BLACK_FG}\] \w \[${YELLOW_BG}\]$(__git_ps1 " %s ")\[${RESET}\]$ '
+    PS1+='\h \[${GREEN_BG}\]\[${BLACK_FG}\] \w \[${YELLOW_BG}\]$(__git_ps1 " %s ")\[${RESET}\]'
+    PS1+='\[${WHITE_FG}\]\[${USE_BG}\]$\[${RESET}\] '
     export PS1
 fi
 
