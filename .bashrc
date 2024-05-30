@@ -78,7 +78,7 @@ else
     PS1=''
     # normal user
     if [[ -n $SSH_CLIENT ]]; then
-        PS1+='${WHITE_FG}${MAG_BG}'
+        PS1+='\[${WHITE_FG}\]\[${MAG_BG}\]'
     else
         PS1+='\[${WHITE_FG}\]\[${BLUE_BG}\]'
     fi
