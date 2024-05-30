@@ -54,14 +54,37 @@ export PYTHONPATH="$PYTHONPATH:/home/zingale/classes/numerical_exercises/:/home/
 # them in the line length calculation and things will be messed up.
 # also deal with root
 source /usr/share/git-core/contrib/completion/git-prompt.sh
-export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWDIRTYSTATE=1    # * appears if dirty
+export GIT_PS1_SHOWSTASHSTATE=1    # $ appears if stashes
+export GIT_PS1_SHOWUPSTREAM="auto" # < = > appear if behind, on, ahead of remote
+export PROMPT_DIRTRIM=2
+
+WHITE_FG=`tput setaf 7`
+YELLOW_FG=`tput setaf 3`
+BLACK_FG=`tput setaf 0`
+
+YELLOW_BG=`tput setab 11`
+BLUE_BG=`tput setab 4`
+GREEN_BG=`tput setab 2`
+RED_BG=`tput setab 1`
+MAG_BG=`tput setab 5`
+RESET=`tput sgr0`
 
 if [ $(id -u) -eq 0 ]; then
     # root
-    export PS1='\[\e[0;31m\][\u@\h \W]# \[\e[0m\]'
+    #export PS1='\[\e[7;31m\][\u@\h \W]# \[\e[0m\]'
+    export PS1='\[${WHITE_FG}\]\[${RED_BG}\]\u@\h \[${RESET}\] \W# '
 else
-    # normal user 
-    export PS1='[\u@\[\e[1;34m\]\h\[\e[0m\] \W]\[\e[1;34m\]$(__git_ps1 "(%s)")\[\e[0m\]$ '
+    PS1=''
+    # normal user
+    if [[ -n $SSH_CLIENT ]]; then
+        PS1+='${WHITE_FG}${MAG_BG}'
+    else
+        PS1+='\[${WHITE_FG}\]\[${BLUE_BG}\]'
+    fi
+
+    PS1+='\h \[${GREEN_BG}\]\[${BLACK_FG}\] \w \[${YELLOW_BG}\]$(__git_ps1 " %s ")\[${RESET}\]$ '
+    export PS1
 fi
 
 
