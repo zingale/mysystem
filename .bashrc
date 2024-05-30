@@ -75,7 +75,7 @@ if [ $(id -u) -eq 0 ]; then
     #export PS1='\[\e[7;31m\][\u@\h \W]# \[\e[0m\]'
     export PS1='\[${WHITE_FG}\]\[${RED_BG}\]\u@\h \[${RESET}\] \W# '
 else
-    PS1=''
+    PS1='\n'
     # normal user
     if [[ -n $SSH_CLIENT ]]; then
         PS1+='\[${WHITE_FG}\]\[${MAG_BG}\]'
