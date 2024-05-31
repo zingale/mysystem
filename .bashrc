@@ -31,20 +31,14 @@ fi
 # Microphysics
 export MICROPHYSICS_HOME=/home/zingale/development/Microphysics
 
-# Maestro
-export MAESTRO_HOME=/home/zingale/development/MAESTRO
-
-# AMReX / BoxLib
-export FBOXLIB_HOME=/home/zingale/development/FBoxLib/
-export BOXLIB_USE_MPI_WRAPPERS=1
-
 # initial models
 export INITIAL_MODEL_HOME=/home/zingale/development/initial_models/
 
+# AMReX
 if [ -e /home/zingale/development/AMReX/ ]; then
-    export AMREX_HOME=/home/zingale/development/AMReX/
+    export AMREX_HOME=/home/zingale/development/AMReX
 else
-    export AMREX_HOME=/home/zingale/development/amrex/
+    export AMREX_HOME=/home/zingale/development/amrex
 fi
 
 # Castro stuff
@@ -60,14 +54,45 @@ export PYTHONPATH="$PYTHONPATH:/home/zingale/classes/numerical_exercises/:/home/
 # them in the line length calculation and things will be messed up.
 # also deal with root
 source /usr/share/git-core/contrib/completion/git-prompt.sh
-export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWDIRTYSTATE=1    # * appears if dirty
+export GIT_PS1_SHOWSTASHSTATE=1    # $ appears if stashes
+export GIT_PS1_SHOWUPSTREAM="auto" # < = > appear if behind, on, ahead of remote
+export PROMPT_DIRTRIM=2
+
+WHITE_FG=`tput setaf 7`
+YELLOW_FG=`tput setaf 3`
+BLACK_FG=`tput setaf 0`
+BLUE_FG=`tput setaf 12`
+MAG_FG=`tput setaf 5`
+
+YELLOW_BG=`tput setab 11`
+BLUE_BG=`tput setab 12`
+GREEN_BG=`tput setab 10`
+RED_BG=`tput setab 1`
+MAG_BG=`tput setab 5`
+RESET=`tput sgr0`
+
+ENDCAP=''
 
 if [ $(id -u) -eq 0 ]; then
     # root
-    export PS1='\[\e[0;31m\][\u@\h \W]# \[\e[0m\]'
+    #export PS1='\[\e[7;31m\][\u@\h \W]# \[\e[0m\]'
+    export PS1='\[${WHITE_FG}\]\[${RED_BG}\]\u@\h \[${RESET}\] \W# '
 else
-    # normal user 
-    export PS1='[\u@\[\e[1;34m\]\h\[\e[0m\] \W]\[\e[1;34m\]$(__git_ps1 "(%s)")\[\e[0m\]$ '
+    PS1='\n'
+    # normal user
+    if [[ -n $SSH_CLIENT ]]; then
+        USE_BG=${MAG_BG}
+        CAP_FG=${MAG_FG}
+    else
+        USE_BG=${BLUE_BG}
+        CAP_FG=${BLUE_FG}
+    fi
+    PS1+='\[${WHITE_FG}\]\[${USE_BG}\]'
+
+    PS1+='\h \[${GREEN_BG}\]\[${BLACK_FG}\] \w \[${YELLOW_BG}\]$(__git_ps1 " %s ")\[${RESET}\]'
+    PS1+='\[${WHITE_FG}\]\[${USE_BG}\]\[${RESET}\]\[${CAP_FG}\]\[${ENDCAP}\]\[${RESET}\] '
+    export PS1
 fi
 
 
@@ -85,7 +110,7 @@ fi
 if [ $hostname == "groot.astro.sunysb.edu" ]; then
 
     # CUDA
-    export CUDA_PATH=/usr/local/cuda-12.1
+    export CUDA_PATH=/usr/local/cuda-12.4
     export PATH=$CUDA_PATH/bin:$PATH
 
     # HYPRE

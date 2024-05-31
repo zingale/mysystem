@@ -42,6 +42,10 @@ unused devices: <none>
 mdadm --manage /dev/md0 --remove /dev/sdb1
 ```
 
+# physically swap the disk
+
+...
+
 # replicate partition table
 
 ```
