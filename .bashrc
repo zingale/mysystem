@@ -59,7 +59,8 @@ export GIT_PS1_SHOWSTASHSTATE=1    # $ appears if stashes
 export GIT_PS1_SHOWUPSTREAM="auto" # < = > appear if behind, on, ahead of remote
 export PROMPT_DIRTRIM=2
 
-WHITE_FG=`tput setaf 7`
+WHITE_FG=`tput setaf 15`
+GIT_FG=`tput setaf 1`
 YELLOW_FG=`tput setaf 3`
 BLACK_FG=`tput setaf 0`
 BLUE_FG=`tput setaf 12`
@@ -90,7 +91,7 @@ else
     fi
     PS1+='\[${WHITE_FG}\]\[${USE_BG}\]'
 
-    PS1+='\h \[${GREEN_BG}\]\[${BLACK_FG}\] \w \[${YELLOW_BG}\]$(__git_ps1 " %s ")\[${RESET}\]'
+    PS1+='\h \[${GREEN_BG}\]\[${BLACK_FG}\] \w \[${YELLOW_BG}\]\[${GIT_FG}\]$(__git_ps1 " %s ")\[${RESET}\]'
     PS1+='\[${WHITE_FG}\]\[${USE_BG}\]\[${RESET}\]\[${CAP_FG}\]\[${ENDCAP}\]\[${RESET}\] '
     export PS1
 fi
