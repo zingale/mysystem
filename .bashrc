@@ -62,13 +62,17 @@ export PROMPT_DIRTRIM=2
 WHITE_FG=`tput setaf 7`
 YELLOW_FG=`tput setaf 3`
 BLACK_FG=`tput setaf 0`
+BLUE_FG=`tput setaf 12`
+MAG_FG=`tput setaf 5`
 
 YELLOW_BG=`tput setab 11`
-BLUE_BG=`tput setab 4`
-GREEN_BG=`tput setab 2`
+BLUE_BG=`tput setab 12`
+GREEN_BG=`tput setab 10`
 RED_BG=`tput setab 1`
 MAG_BG=`tput setab 5`
 RESET=`tput sgr0`
+
+ENDCAP=''
 
 if [ $(id -u) -eq 0 ]; then
     # root
@@ -79,13 +83,15 @@ else
     # normal user
     if [[ -n $SSH_CLIENT ]]; then
         USE_BG=${MAG_BG}
+        CAP_FG=${MAG_FG}
     else
         USE_BG=${BLUE_BG}
+        CAP_FG=${BLUE_FG}
     fi
     PS1+='\[${WHITE_FG}\]\[${USE_BG}\]'
 
     PS1+='\h \[${GREEN_BG}\]\[${BLACK_FG}\] \w \[${YELLOW_BG}\]$(__git_ps1 " %s ")\[${RESET}\]'
-    PS1+='\[${WHITE_FG}\]\[${USE_BG}\]$\[${RESET}\] '
+    PS1+='\[${WHITE_FG}\]\[${USE_BG}\]\[${RESET}\]\[${CAP_FG}\]\[${ENDCAP}\]\[${RESET}\] '
     export PS1
 fi
 
