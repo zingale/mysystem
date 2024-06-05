@@ -62,11 +62,12 @@ export PROMPT_DIRTRIM=2
 if [[ $- == *i* ]]; then        # don't run this tput commands from a non-interactive shell
 
     WHITE_FG=`tput setaf 15`
-    GIT_FG=`tput setaf 1`
+    GIT_FG=`tput setaf 8`
     YELLOW_FG=`tput setaf 3`
     BLACK_FG=`tput setaf 0`
     BLUE_FG=`tput setaf 12`
     MAG_FG=`tput setaf 5`
+    GREEN_FG=`tput setaf 10`
 
     YELLOW_BG=`tput setab 11`
     BLUE_BG=`tput setab 12`
