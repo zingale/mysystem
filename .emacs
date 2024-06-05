@@ -194,5 +194,5 @@
 (editorconfig-mode 1)
 
 ;; company-mode (autocomplete)
-(add-hook 'after-init-hook 'global-company-mode)
+;;(add-hook 'after-init-hook 'global-company-mode)
 

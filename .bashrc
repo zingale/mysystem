@@ -59,21 +59,24 @@ export GIT_PS1_SHOWSTASHSTATE=1    # $ appears if stashes
 export GIT_PS1_SHOWUPSTREAM="auto" # < = > appear if behind, on, ahead of remote
 export PROMPT_DIRTRIM=2
 
-WHITE_FG=`tput setaf 15`
-GIT_FG=`tput setaf 1`
-YELLOW_FG=`tput setaf 3`
-BLACK_FG=`tput setaf 0`
-BLUE_FG=`tput setaf 12`
-MAG_FG=`tput setaf 5`
+if [[ $- == *i* ]]; then        # don't run this tput commands from a non-interactive shell
 
-YELLOW_BG=`tput setab 11`
-BLUE_BG=`tput setab 12`
-GREEN_BG=`tput setab 10`
-RED_BG=`tput setab 1`
-MAG_BG=`tput setab 5`
-RESET=`tput sgr0`
+    WHITE_FG=`tput setaf 15`
+    GIT_FG=`tput setaf 1`
+    YELLOW_FG=`tput setaf 3`
+    BLACK_FG=`tput setaf 0`
+    BLUE_FG=`tput setaf 12`
+    MAG_FG=`tput setaf 5`
 
-ENDCAP=''
+    YELLOW_BG=`tput setab 11`
+    BLUE_BG=`tput setab 12`
+    GREEN_BG=`tput setab 10`
+    RED_BG=`tput setab 1`
+    MAG_BG=`tput setab 5`
+    RESET=`tput sgr0`
+
+    ENDCAP=''
+fi
 
 if [ $(id -u) -eq 0 ]; then
     # root
