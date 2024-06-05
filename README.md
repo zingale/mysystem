@@ -369,7 +369,7 @@ fc-cache -v
 ### other fonts
 
 ```
-dnf install adf-gillius-fonts mozilla-fira-sans-fonts*
+dnf install adf-gillius-fonts mozilla-fira-sans-fonts* powerline-fonts
 
 ```
 
