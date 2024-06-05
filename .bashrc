@@ -98,7 +98,7 @@ else
     PS1+='\[${WHITE_FG}\]\[${USE_BG}\]'
 
     PS1+='\h \[${GREEN_BG}\]\[${BLACK_FG}\] \w \[${GREEN_BG}\]\[${GIT_FG}\]$(__git_ps1 "[%s]")\[${RESET}\]'
-    PS1+='\[${WHITE_FG}\]\[${USE_BG}\]\[${RESET}\]\[${CAP_FG}\]\[${ENDCAP}\]\[${RESET}\] '
+    PS1+='\[${CAP_FG}\]${ENDCAP}\[${RESET}\] '
     export PS1
 fi
 
