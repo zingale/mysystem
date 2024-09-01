@@ -45,9 +45,6 @@ fi
 export CASTRO_HOME=/home/zingale/development/Castro
 export WDMERGER_HOME=/home/zingale/development/wdmerger
 
-# plotting numerical exercises
-export PYTHONPATH="$PYTHONPATH:/home/zingale/classes/numerical_exercises/:/home/zingale/classes/astro_animations"
-
 # prompt -- this gets the git branch in the prompt
 # we also use some coloring.  Note that we need to put the 
 # coloring escape codes inside \[ \], otherwise, bash will include
