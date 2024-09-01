@@ -955,3 +955,30 @@ see:
 https://www.reddit.com/r/Fedora/comments/15i5wcg/fedora_38_cant_disable_sleepsuspend/
 
 
+## dnf automatic updates
+
+Following: https://orcacore.com/run-automatic-updates-with-dnf-automatic-rhel/
+
+```
+dnf install dnf-automatic
+```
+
+edit: `/etc/dnf/automatic.conf` and change:
+
+* `upgrade_type` to `security`
+* `emit_via` to `email`
+
+and update the email settings
+
+then enable:
+
+```
+systemctl enable --now dnf-automatic.timer
+```
+
+and check:
+
+```
+systemctl status dnf-automatic.timer
+systemctl list-timers dnf-*
+```
