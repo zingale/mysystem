@@ -1,0 +1,70 @@
+
+# scientific python
+
+matplotlib
+numba
+numpy
+h5py
+scipy
+sympy
+keras
+tensorflow
+pydot
+graphviz
+scikit-learn
+networkx
+
+
+# docs
+
+sphinx_book_theme
+nbsphinx
+numpydoc
+sphinxcontrib-bibtex
+sphinx-math-dollar
+sphinx-copybutton
+sphinx-prompt
+sphinx_design
+sphinx-book-theme
+pydata-sphinx-theme
+jinja2
+sphinx-mdinclude
+sphinx_rtd_theme
+sphinxcontrib-bibtex
+breathe
+
+
+# references
+
+ads
+bibtexparser
+feedparser
+
+
+# testing
+
+pytest
+nbval
+pytest-cov
+
+
+# style
+
+flake8
+codespell
+pylint
+pyupgrade
+html5validator
+
+
+# python
+
+importlib-metadata
+prettytable
+
+
+# jupyter
+
+jupyter-book
+jupyterlab_myst
+ipywidgets
