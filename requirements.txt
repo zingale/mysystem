@@ -33,6 +33,9 @@ sphinx_rtd_theme
 sphinxcontrib-bibtex
 breathe
 
+# packaging
+build
+twine
 
 # references
 
