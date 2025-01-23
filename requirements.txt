@@ -36,6 +36,7 @@ breathe
 # packaging
 build
 twine
+packaging
 
 # references
 
