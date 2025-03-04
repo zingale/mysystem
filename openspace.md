@@ -4,8 +4,14 @@ install packages:
 dnf install gdal-devel mpv mpv-libs mpv-devel libXxf86vm libXxf86vm-devel curl-devel
 ```
 
-apply the fixes here:
-https://github.com/OpenSpace/OpenSpace/pull/3548
+clone:
+
+```
+git clone --recursive git@github.com:OpenSpace/OpenSpace.git
+```
+
+(use the development version to get the fixes here:
+https://github.com/OpenSpace/OpenSpace/pull/3548)
 
 
 make:
