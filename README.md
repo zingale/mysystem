@@ -12,8 +12,12 @@ sudo passwd root
 
 ```
 dnf update
-dnf install emacs emacs-flycheck emacs-yaml-mode
+dnf install emacs emacs-flycheck emacs-yaml-mode cppcheck
 ```
+
+with the `.emacs` here, this will enable a lot of check.  You
+can verify that they are active in a buffer by using
+`M-x flycheck-verify-setup`.
 
 ## hostname
 

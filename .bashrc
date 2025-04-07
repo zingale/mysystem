@@ -28,6 +28,13 @@ a=$(which bat >& /dev/null); if [ $? == 0 ]; then
     alias cat='bat --map-syntax="*.H:C++"'
 fi
 
+# a simple clang-tidy invocation for a single file
+tidy ()
+{
+    clang-tidy $1 -header-filter=.* -checks=-*,bugprone-*,misc-*,modernize-*,performance-*,readibility-*,cppcoreguidelines-*,-performance-avoid-endl,-modernize-use-trailing-return-type,-misc-non-private-member-variables-in-classes,-misc-const-correctness -- $1
+}
+
+
 # Microphysics
 export MICROPHYSICS_HOME=/home/zingale/development/Microphysics
 
