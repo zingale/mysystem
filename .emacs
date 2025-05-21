@@ -196,3 +196,5 @@
 ;; company-mode (autocomplete)
 ;;(add-hook 'after-init-hook 'global-company-mode)
 
+;; search show X of Y
+(setq isearch-lazy-count t)
