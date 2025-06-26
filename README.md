@@ -619,20 +619,24 @@ in the above status
 
 ### have mdadm send e-mail alerts:
 
-https://dustymabe.com/2012/01/29/monitor-raid-arrays-and-get-e-mail-alerts-using-mdadm/
+Start the mdmonitor service:
+```
+systemctl enable mdmonitor
+systemctl start mdmonitor
+```
 
-add
+then edit `/etc/mdadm.conf` (create it if it does not exist) and add
+
 ```
 MAILADDR michael.zingale@stonybrook.edu
 ```
-to `/etc/mdadm.conf`
 
 test this with:
 ```
 mdadm --monitor --scan --test -1
 ```
 
-enable monitoring
+older way:
 
 https://raid.wiki.kernel.org/index.php/Detecting,_querying_and_testing
 ```
