@@ -19,7 +19,8 @@
 
 ; git
 (load "~/mysystem/git-gutter.el")
-(global-git-gutter-mode +1)
+(require 'git-gutter)
+(global-git-gutter-mode t)
 
 ; castro inputs files
 (add-to-list 'auto-mode-alist '("inputs*" . conf-mode))
