@@ -17,6 +17,10 @@
 (add-to-list 'auto-mode-alist '("\\.mak\\'" . makefile-mode))
 (add-to-list 'auto-mode-alist '("^Make.*\\'" . makefile-mode))
 
+; git
+(load "~/mysystem/git-gutter.el")
+(global-git-gutter-mode +1)
+
 ; castro inputs files
 (add-to-list 'auto-mode-alist '("inputs*" . conf-mode))
 
