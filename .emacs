@@ -21,6 +21,9 @@
 (load "~/mysystem/git-gutter.el")
 (require 'git-gutter)
 (global-git-gutter-mode t)
+(custom-set-variables
+ '(git-gutter:separator-sign "|"))
+(set-face-foreground 'git-gutter:separator "gray")
 
 ; castro inputs files
 (add-to-list 'auto-mode-alist '("inputs*" . conf-mode))
