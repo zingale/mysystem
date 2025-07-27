@@ -31,7 +31,7 @@ fi
 # a simple clang-tidy invocation for a single file
 tidy ()
 {
-    clang-tidy $1 -header-filter=.* -checks=-*,bugprone-*,misc-*,modernize-*,performance-*,readibility-*,cppcoreguidelines-*,-performance-avoid-endl,-modernize-use-trailing-return-type,-misc-non-private-member-variables-in-classes,-misc-const-correctness -- $1
+    clang-tidy $1 -header-filter=.* -checks=-*,bugprone-*,misc-*,modernize-*,performance-*,readibility-*,cppcoreguidelines-*,-performance-avoid-endl,-modernize-use-trailing-return-type,-misc-non-private-member-variables-in-classes,-misc-const-correctness,-cppcoreguidelines-avoid-magic-numbers -- $1
 }
 
 run_notebook ()

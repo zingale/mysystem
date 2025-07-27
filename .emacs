@@ -189,7 +189,14 @@
 
 ;; C+
 (add-hook 'c++-mode-hook 'flycheck-mode)
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++17")))
+;(add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++23")))
+;(add-hook 'c++-mode-hook (lambda () (setq flycheck-cppcheck-language-standard "c++23")))
+(with-eval-after-load 'flycheck
+  ;; Use C++23 for GCC
+  (setq-default flycheck-gcc-language-standard "c++23")
+
+  ;; Use C++23 for Clang
+  (setq-default flycheck-clang-language-standard "c++23"))
 
 (put 'upcase-region 'disabled nil)
 
