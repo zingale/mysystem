@@ -45,26 +45,23 @@ set term qt enhanced font my_font
 set pointsize my_ps
 
 # set the style for the set 1, 2, 3...
-set style line 1 linecolor rgbcolor blue_025 linewidth @my_line_width pt 7
-set style line 2 linecolor rgbcolor green_025 linewidth @my_line_width pt 5
-set style line 3 linecolor rgbcolor red_025 linewidth @my_line_width pt 9
-set style line 4 linecolor rgbcolor brown_025 linewidth @my_line_width pt 13
-set style line 5 linecolor rgbcolor blue_050 linewidth @my_line_width pt 11
-set style line 6 linecolor rgbcolor green_050 linewidth @my_line_width pt 7
-set style line 7 linecolor rgbcolor red_050 linewidth @my_line_width pt 5
-set style line 8 linecolor rgbcolor brown_050 linewidth @my_line_width pt 9
-set style line 9 linecolor rgbcolor blue_075 linewidth @my_line_width pt 13
-set style line 10 linecolor rgbcolor green_075 linewidth @my_line_width pt 11
-set style line 11 linecolor rgbcolor red_075 linewidth @my_line_width pt 7
-set style line 12 linecolor rgbcolor brown_075 linewidth @my_line_width pt 5
-set style line 13 linecolor rgbcolor blue_100 linewidth @my_line_width pt 9
-set style line 14 linecolor rgbcolor green_100 linewidth @my_line_width pt 13
-set style line 15 linecolor rgbcolor red_100 linewidth @my_line_width pt 11
-set style line 16 linecolor rgbcolor brown_100 linewidth @my_line_width pt 7
-set style line 17 linecolor rgbcolor "#224499" linewidth @my_line_width pt 5
-
-# this is to use the user-defined styles we just defined.
-set style increment user
+set linetype 1 linecolor rgbcolor blue_025 linewidth @my_line_width pt 7
+set linetype 2 linecolor rgbcolor green_025 linewidth @my_line_width pt 5
+set linetype 3 linecolor rgbcolor red_025 linewidth @my_line_width pt 9
+set linetype 4 linecolor rgbcolor brown_025 linewidth @my_line_width pt 13
+set linetype 5 linecolor rgbcolor blue_050 linewidth @my_line_width pt 11
+set linetype 6 linecolor rgbcolor green_050 linewidth @my_line_width pt 7
+set linetype 7 linecolor rgbcolor red_050 linewidth @my_line_width pt 5
+set linetype 8 linecolor rgbcolor brown_050 linewidth @my_line_width pt 9
+set linetype 9 linecolor rgbcolor blue_075 linewidth @my_line_width pt 13
+set linetype 10 linecolor rgbcolor green_075 linewidth @my_line_width pt 11
+set linetype 11 linecolor rgbcolor red_075 linewidth @my_line_width pt 7
+set linetype 12 linecolor rgbcolor brown_075 linewidth @my_line_width pt 5
+set linetype 13 linecolor rgbcolor blue_100 linewidth @my_line_width pt 9
+set linetype 14 linecolor rgbcolor green_100 linewidth @my_line_width pt 13
+set linetype 15 linecolor rgbcolor red_100 linewidth @my_line_width pt 11
+set linetype 16 linecolor rgbcolor brown_100 linewidth @my_line_width pt 7
+set linetype 17 linecolor rgbcolor "#224499" linewidth @my_line_width pt 5
 
 # set the color and font of the text of the axis
 set xtics textcolor rgb text_color font my_tfont
