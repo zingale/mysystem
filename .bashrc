@@ -39,6 +39,11 @@ run_notebook ()
    jupyter nbconvert --to notebook --execute $1 --inplace
 }
 
+spchars ()
+{
+    echo αβγδεζηθικλμνξοπρστυφχψω ΓΔΘΛΞΠΣΦΨΩ ∂∇∫≤≥ — ←→ ✓ ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻
+}
+
 # Microphysics
 export MICROPHYSICS_HOME=/home/zingale/development/Microphysics
 
