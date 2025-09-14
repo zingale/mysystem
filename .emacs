@@ -178,6 +178,10 @@
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
+;; spelling
+(setq ispell-program-name "aspell")
+(setq ispell-dictionary "english") ;; or "en_US", "en_GB", etc.
+
 ;; column number mode
 (setq column-number-mode t)
 
