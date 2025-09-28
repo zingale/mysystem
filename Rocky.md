@@ -14,6 +14,23 @@ dnf install mpich mpich-devel mpich-autoload
 
 dnf install gnuplot
 
+## python
+
+```
+dnf install python3.12
+```
+
+## GCC
+
+```
+dnf install gcc-toolset-14
+```
+
+Then enable it via:
+
+```
+scl enable gcc-toolset-14 bash
+```
 
 ## changing IP and hostname
 
