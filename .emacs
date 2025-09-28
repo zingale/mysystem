@@ -188,6 +188,11 @@
 
 ;; window tab line
 (global-tab-line-mode 1)
+(custom-set-faces
+ '(tab-line ((t (:background "gray20" :foreground "white" :height 1.0))))
+ '(tab-line-tab ((t (:background "gray30" :foreground "light gray"))))
+ '(tab-line-tab-current ((t (:background "RoyalBlue4" :foreground "white" :box (:line-width -1 :style released-button)))))
+ '(tab-line-tab-inactive ((t (:background "gray25" :foreground "light gray")))))
 
 
 ;; python
@@ -217,3 +222,16 @@
 
 ;; search show X of Y
 (setq isearch-lazy-count t)
+
+
+;; flycheck
+
+(defun my/set-flycheck-clang-include-path ()
+  (when (derived-mode-p 'c++-mode)
+    (let ((base (getenv "AMREX_HOME")))
+      (when base
+        (setq-local flycheck-clang-include-path
+                    (list (concat base "/Src/Amr")
+                          (concat base "/Src/AmrCore")))))))
+
+(add-hook 'c++-mode-hook #'my/set-flycheck-clang-include-path)
