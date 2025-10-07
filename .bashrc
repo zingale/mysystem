@@ -28,6 +28,9 @@ a=$(which bat >& /dev/null); if [ $? == 0 ]; then
     alias cat='bat --map-syntax="*.H:C++"'
 fi
 
+# don't clear the screen
+export BAT_PAGER="less -FRX"
+
 # a simple clang-tidy invocation for a single file
 tidy ()
 {
