@@ -52,6 +52,35 @@ change plugged in delay to 0 to disable suspend:
 sudo -u gdm dbus-run-session gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
 ```
 
+## fix gdm not starting at boot
+
+On systems that have gone through a lot of upgrades, the `pam` component will fail, because
+`pam_lastlog.so` is not longer used, but instead `pam_lastlog2.so`
+
+To fix this, first check:
+
+```
+authselect current
+
+```
+
+if it shows `No existing configuration detected.`, then things are not setup correctly.
+Then do:
+
+```
+authselect select sssd --force
+authselect apply-changes
+```
+
+and reboot.
+
+You can also check that lastlog is not used by doing:
+
+```
+grep -R "pam_lastlog\.so" /etc/pam.d /etc/authselect -n || echo "OK"
+```
+
+
 ## change root prompt
 
 edit `/root/.bashrc/` and add:
