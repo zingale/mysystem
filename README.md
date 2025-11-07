@@ -179,6 +179,7 @@ Sphinx infrastructure:
 pip3 install nbsphinx --user
 pip3 install numpydoc --user
 pip3 install sphinx_rtd_theme --user
+pip3 install sphinx_math_dollar --user
 pip3 install sphinxcontrib-bibtex --user
 pip3 install breathe --user
 pip3 install sphinx-copybutton --user

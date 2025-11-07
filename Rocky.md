@@ -20,6 +20,20 @@ dnf install gnuplot
 dnf install python3.12
 ```
 
+to register this kernel with Jupyter do:
+
+```
+pip3.12 install ipykernel
+python3.12 -m ipykernel install --user --name mypython312 --display-name "Python 3.12 (Custom)"
+```
+
+then make sure it shows up:
+
+```
+jupyter kernelspec list
+```
+
+
 ## GCC
 
 ```
