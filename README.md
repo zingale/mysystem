@@ -80,6 +80,15 @@ You can also check that lastlog is not used by doing:
 grep -R "pam_lastlog\.so" /etc/pam.d /etc/authselect -n || echo "OK"
 ```
 
+Alternately, this:
+https://discussion.fedoraproject.org/t/gdm-crashes-after-upgrade-to-fedora-43-due-to-authselect-migration/171961
+
+suggests doing:
+
+```
+sudo authselect select local with-silent-lastlog with-fingerprint with-mdns4 --force
+```
+
 
 ## change root prompt
 
