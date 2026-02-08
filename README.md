@@ -1029,3 +1029,11 @@ and check:
 systemctl status dnf-automatic.timer
 systemctl list-timers dnf-*
 ```
+
+# MESA
+
+The MESASDK needs `csh`:
+
+```
+dnf install tcsh
+```

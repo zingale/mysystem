@@ -152,3 +152,20 @@ if [ "`cat /etc/machine-id`" == "cbd4091cb4e449679f543c1f61d6b4cf" ]; then
     alias zoom="QT_DEVICE_PIXEL_RATIO=2 zoom"
 fi
 
+# MESASDK
+if [ -d ~/development/mesasdk ]; then
+    export MESASDK_ROOT=~/development/mesasdk
+    alias setup_mesa="source $MESASDK_ROOT/bin/mesasdk_init.sh"
+fi
+
+# MESA
+if [ -d ~/development/mesa-25.12.1 ]; then
+    export MESA_DIR=~/development/mesa-25.12.1
+    export PATH=$PATH:$MESA_DIR/scripts/shmesa
+fi
+
+# texlive custom install
+
+if [ -d ~/texlive ]; then
+    export PATH=/home/zingale/texlive/2025/bin/x86_64-linux:$PATH
+fi
