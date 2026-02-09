@@ -17,8 +17,6 @@ alias mv='mv -i'
 
 alias ssh='ssh -Y'
 
-alias ipython='ipython3'
-
 export EDITOR="emacs -nw"
 
 alias screenkill="screen -ls | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs kill"
@@ -123,13 +121,6 @@ fi
 export PATH=~/.local/bin:${PATH}
 
 hostname=`uname -n`
-if [ $hostname == "bender.astro.sunysb.edu" ]; then
-    # PGI
-    # CUDA
-    export CUDA_PATH=/usr/local/cuda-12.1
-    export PATH=$CUDA_PATH/bin:$PATH
-fi
-
 if [ $hostname == "groot.astro.sunysb.edu" ]; then
 
     # CUDA
@@ -152,3 +143,20 @@ if [ "`cat /etc/machine-id`" == "cbd4091cb4e449679f543c1f61d6b4cf" ]; then
     alias zoom="QT_DEVICE_PIXEL_RATIO=2 zoom"
 fi
 
+# MESASDK
+if [ -d ~/development/mesasdk ]; then
+    export MESASDK_ROOT=~/development/mesasdk
+    alias setup_mesa="source $MESASDK_ROOT/bin/mesasdk_init.sh"
+fi
+
+# MESA
+if [ -d ~/development/mesa-25.12.1 ]; then
+    export MESA_DIR=~/development/mesa-25.12.1
+    export PATH=$PATH:$MESA_DIR/scripts/shmesa
+fi
+
+# texlive custom install
+
+if [ -d ~/texlive ]; then
+    export PATH=/home/zingale/texlive/2025/bin/x86_64-linux:$PATH
+fi

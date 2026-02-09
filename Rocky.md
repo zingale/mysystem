@@ -17,19 +17,20 @@ dnf install gnuplot
 ## python
 
 ```
-dnf install python3.12
+dnf install python3.13 python3.13-pip
 ```
 
 to register this kernel with Jupyter do:
 
 ```
-pip3.12 install ipykernel
-python3.12 -m ipykernel install --user --name mypython312 --display-name "Python 3.12 (Custom)"
+pip3.13 install ipykernel
+python3.13 -m ipykernel install --user --name mypython313 --display-name "Python 3.13 (Custom)"
 ```
 
 then make sure it shows up:
 
 ```
+pip3.13 install jupyter
 jupyter kernelspec list
 ```
 
@@ -37,13 +38,14 @@ jupyter kernelspec list
 ## GCC
 
 ```
-dnf install gcc-toolset-14
+dnf install gcc-toolset-15
+gcc-toolset-15-gcc-plugin-annobin
 ```
 
 Then enable it via:
 
 ```
-scl enable gcc-toolset-14 bash
+scl enable gcc-toolset-15 bash
 ```
 
 ## changing IP and hostname
