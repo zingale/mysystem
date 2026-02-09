@@ -15,7 +15,8 @@
 (add-to-list 'auto-mode-alist '("\\.pyx$" . python-mode))
 
 (add-to-list 'auto-mode-alist '("\\.mak\\'" . makefile-mode))
-(add-to-list 'auto-mode-alist '("^Make.*\\'" . makefile-mode))
+(add-to-list 'auto-mode-alist '("/Make[^/]*\\'" . makefile-mode))
+
 
 ; git
 (load "~/mysystem/git-gutter.el")
@@ -226,12 +227,45 @@
 
 ;; flycheck
 
+;; C++ include paths
+
 (defun my/set-flycheck-clang-include-path ()
+  "Set Flycheck Clang include paths using AMREX_HOME and CASTRO_HOME environment variables."
   (when (derived-mode-p 'c++-mode)
-    (let ((base (getenv "AMREX_HOME")))
-      (when base
-        (setq-local flycheck-clang-include-path
-                    (list (concat base "/Src/Amr")
-                          (concat base "/Src/AmrCore")))))))
+    (let ((paths '()))
+      ;; Add AMReX paths if AMREX_HOME is set
+      (let ((amrex (getenv "AMREX_HOME")))
+        (when amrex
+          (let ((base (expand-file-name amrex)))
+            (setq paths (append paths
+                                (list (concat base "/Src/Amr")
+                                      (concat base "/Src/AmrCore")
+                                      (concat base "/Src/Base")
+                                      (concat base "/Src/LinearSolvers")
+                                      (concat base "/Src/LinearSolvers/MLMG")))))))
+      ;; Add Castro paths if CASTRO_HOME is set
+      (let ((castro (getenv "CASTRO_HOME")))
+        (when castro
+          (let ((base (expand-file-name castro)))
+            (setq paths (append paths
+                                (list (concat base "/Source/diffusion")
+                                      (concat base "/Source/driver")
+                                      (concat base "/Source/gravity")
+                                      (concat base "/Source/hydro")
+                                      (concat base "/Source/mhd")
+                                      (concat base "/Source/particles")
+                                      (concat base "/Source/problems")
+                                      (concat base "/Source/radiation")
+                                      (concat base "/Source/reactions")
+                                      (concat base "/Source/rotation")
+                                      (concat base "/Source/scf")
+                                      (concat base "/Source/sdc")
+                                      (concat base "/Source/sources")))))))
+
+      ;; Finally, set Flycheck variable only if there are any paths
+      (when paths
+        (setq-local flycheck-clang-include-path paths)
+        (flycheck-mode 1)
+        (flycheck-buffer)))))
 
 (add-hook 'c++-mode-hook #'my/set-flycheck-clang-include-path)
