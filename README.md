@@ -1,6 +1,6 @@
 # Fedora Configuration Notes
 
-updated for Fedora 36
+updated for Fedora 43
 
 ## change root password
 
