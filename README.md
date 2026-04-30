@@ -1008,14 +1008,16 @@ Following: https://orcacore.com/run-automatic-updates-with-dnf-automatic-rhel/
 
 ```
 dnf install dnf-automatic
+cp  /usr/share/dnf5/dnf5-plugins/automatic.conf /etc/dnf/automatic.conf
 ```
 
 edit: `/etc/dnf/automatic.conf` and change:
 
+* `apply_updates` to `yes`
 * `upgrade_type` to `security`
 * `emit_via` to `email`
 
-and update the email settings
+and update the email settings in the ``[email]`` block
 
 then enable:
 
