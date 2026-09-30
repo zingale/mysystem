@@ -230,7 +230,8 @@
 (defun my/set-flycheck-clang-include-path ()
   "Set Flycheck Clang include paths using AMREX_HOME and CASTRO_HOME environment variables."
   (when (derived-mode-p 'c++-mode)
-    (let ((paths '()))
+    ;; Relative include paths are resolved against the file being checked.
+    (let ((paths '(".")))
       ;; Add AMReX paths if AMREX_HOME is set
       (let ((amrex (getenv "AMREX_HOME")))
         (when amrex
