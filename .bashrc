@@ -143,6 +143,7 @@ fi
 if [ $hostname == "ahsoka.astro.sunysb.edu" ]; then
     # HYPRE
     export HYPRE_DIR=/opt/hypre/
+    source /opt/rh/gcc-toolset-15/enable
 fi
 
 
