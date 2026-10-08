@@ -15,14 +15,20 @@
 (add-to-list 'auto-mode-alist '("\\.pyx$" . python-mode))
 
 (add-to-list 'auto-mode-alist '("\\.mak\\'" . makefile-mode))
-(add-to-list 'auto-mode-alist '("^Make.*\\'" . makefile-mode))
+(add-to-list 'auto-mode-alist '("/Make[^/]*\\'" . makefile-mode))
+
 
 ; git
 (load "~/mysystem/git-gutter.el")
 (require 'git-gutter)
 (global-git-gutter-mode t)
 (custom-set-variables
- '(git-gutter:separator-sign "|"))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(git-gutter:separator-sign "|")
+ '(package-selected-packages '(csv-mode indent-bars)))
 (set-face-foreground 'git-gutter:separator "gray")
 
 ; castro inputs files
@@ -99,18 +105,25 @@
   (setq indent-tabs-mode nil))
 (add-hook 'c++-mode-hook #'endless/c-hook)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (csv-mode))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "brightyellow"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "brightred"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "brightgreen"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "brightcyan"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "brightyellow"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "brightred"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "brightgreen"))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "brightcyan"))))
+ '(rainbow-delimiters-unmatched-face ((t (:background "cyan"))))
+ '(tab-line ((t (:background "gray20" :foreground "white" :height 1.0))))
+ '(tab-line-tab ((t (:background "gray30" :foreground "light gray"))))
+ '(tab-line-tab-current ((t (:background "RoyalBlue4" :foreground "white" :box (:line-width -1 :style released-button)))))
+ '(tab-line-tab-inactive ((t (:background "gray25" :foreground "light gray")))))
 
 ; show the function name on the status bar
 (which-function-mode 1)
@@ -136,23 +149,7 @@
 (add-hook 'latex-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'markdown-mode-hook 'rainbow-delimiters-mode)
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
 
- '(rainbow-delimiters-depth-1-face ((t (:foreground "brightyellow"))))
- '(rainbow-delimiters-depth-2-face ((t (:foreground "brightred"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "brightgreen"))))
- '(rainbow-delimiters-depth-4-face ((t (:foreground "brightcyan"))))
- '(rainbow-delimiters-depth-5-face ((t (:foreground "brightyellow"))))
- '(rainbow-delimiters-depth-6-face ((t (:foreground "brightred"))))
- '(rainbow-delimiters-depth-7-face ((t (:foreground "brightgreen"))))
- '(rainbow-delimiters-depth-8-face ((t (:foreground "brightcyan"))))
- '(rainbow-delimiters-unmatched-face ((t (:background "cyan"))))
-
- )
 
 ;; https://yoo2080.wordpress.com/2013/09/08/living-with-rainbow-delimiters-mode/
 ;; make unmatched stand out
@@ -188,11 +185,7 @@
 
 ;; window tab line
 (global-tab-line-mode 1)
-(custom-set-faces
- '(tab-line ((t (:background "gray20" :foreground "white" :height 1.0))))
- '(tab-line-tab ((t (:background "gray30" :foreground "light gray"))))
- '(tab-line-tab-current ((t (:background "RoyalBlue4" :foreground "white" :box (:line-width -1 :style released-button)))))
- '(tab-line-tab-inactive ((t (:background "gray25" :foreground "light gray")))))
+
 
 
 ;; python
@@ -212,6 +205,12 @@
 
 (put 'upcase-region 'disabled nil)
 
+
+;; indent-bars
+(use-package indent-bars
+  :hook ((python-mode c++-mode rst-mode) . indent-bars-mode))
+
+
 ;; editorconfig
 (add-to-list 'load-path "~/mysystem/editorconfig-20230919.2101/")
 (require 'editorconfig)
@@ -226,12 +225,46 @@
 
 ;; flycheck
 
+;; C++ include paths
+
 (defun my/set-flycheck-clang-include-path ()
+  "Set Flycheck Clang include paths using AMREX_HOME and CASTRO_HOME environment variables."
   (when (derived-mode-p 'c++-mode)
-    (let ((base (getenv "AMREX_HOME")))
-      (when base
-        (setq-local flycheck-clang-include-path
-                    (list (concat base "/Src/Amr")
-                          (concat base "/Src/AmrCore")))))))
+    ;; Relative include paths are resolved against the file being checked.
+    (let ((paths '(".")))
+      ;; Add AMReX paths if AMREX_HOME is set
+      (let ((amrex (getenv "AMREX_HOME")))
+        (when amrex
+          (let ((base (expand-file-name amrex)))
+            (setq paths (append paths
+                                (list (concat base "/Src/Amr")
+                                      (concat base "/Src/AmrCore")
+                                      (concat base "/Src/Base")
+                                      (concat base "/Src/LinearSolvers")
+                                      (concat base "/Src/LinearSolvers/MLMG")))))))
+      ;; Add Castro paths if CASTRO_HOME is set
+      (let ((castro (getenv "CASTRO_HOME")))
+        (when castro
+          (let ((base (expand-file-name castro)))
+            (setq paths (append paths
+                                (list (concat base "/Source/diffusion")
+                                      (concat base "/Source/driver")
+                                      (concat base "/Source/gravity")
+                                      (concat base "/Source/hydro")
+                                      (concat base "/Source/mhd")
+                                      (concat base "/Source/particles")
+                                      (concat base "/Source/problems")
+                                      (concat base "/Source/radiation")
+                                      (concat base "/Source/reactions")
+                                      (concat base "/Source/rotation")
+                                      (concat base "/Source/scf")
+                                      (concat base "/Source/sdc")
+                                      (concat base "/Source/sources")))))))
+
+      ;; Finally, set Flycheck variable only if there are any paths
+      (when paths
+        (setq-local flycheck-clang-include-path paths)
+        (flycheck-mode 1)
+        (flycheck-buffer)))))
 
 (add-hook 'c++-mode-hook #'my/set-flycheck-clang-include-path)

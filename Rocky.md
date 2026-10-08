@@ -39,6 +39,7 @@ jupyter kernelspec list
 
 ```
 dnf install gcc-toolset-15
+gcc-toolset-15-gcc-plugin-annobin
 ```
 
 Then enable it via:
