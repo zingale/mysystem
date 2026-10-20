@@ -28,7 +28,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(git-gutter:separator-sign "|")
- '(package-selected-packages '(csv-mode indent-bars)))
+ '(package-selected-packages '(## csv-mode indent-bars)))
 (set-face-foreground 'git-gutter:separator "gray")
 
 ; castro inputs files
