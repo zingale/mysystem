@@ -45,6 +45,12 @@ spchars ()
     echo αβγδεζηθικλμνξοπρστυφχψω ΓΔΘΛΞΠΣΦΨΩ ∂∇∫≤≥ — ←→ ×✓ ☉ ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻ °
 }
 
+mkmovie ()
+{
+    # mkmovie movie.mp4 "*.png"
+    ffmpeg -framerate 15 -f image2 -pattern_type glob -i "$2"  -vcodec mpeg4 -c:v libx264 -crf 20 $1
+}
+
 # Microphysics
 export MICROPHYSICS_HOME=/home/zingale/development/Microphysics
 
