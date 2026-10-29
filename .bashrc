@@ -42,7 +42,7 @@ run_notebook ()
 
 spchars ()
 {
-    echo αβγδεζηθικλμνξοπρστυφχψω ΓΔΘΛΞΠΣΦΨΩ ∂∇∫≤≥ — ←→ ×✓ ☉ ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻ °
+    echo αβγδεζηθικλμνξοπρστυφχψω ΓΔΘΛΞΠΣΦΨΩ ∂∇∫≤≥ — ←→ ×•✓ ☉ ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻ ₀₁₂₃₄₅₆₇₈₉₊₋ ᵢⱼₖ °
 }
 
 mkmovie ()
@@ -164,7 +164,10 @@ if [ -d ~/development/mesasdk ]; then
 fi
 
 # MESA
-if [ -d ~/development/mesa-25.12.1 ]; then
+if [ -d ~/development/mesa ]; then
+    export MESA_DIR=~/development/mesa
+    export PATH=$PATH:$MESA_DIR/scripts/shmesa
+elif [ -d ~/development/mesa-25.12.1 ]; then
     export MESA_DIR=~/development/mesa-25.12.1
     export PATH=$PATH:$MESA_DIR/scripts/shmesa
 fi
