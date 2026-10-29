@@ -51,6 +51,12 @@ mkmovie ()
     ffmpeg -framerate 15 -f image2 -pattern_type glob -i "$2"  -vcodec mpeg4 -c:v libx264 -crf 20 $1
 }
 
+mkmovie_slow ()
+{
+    # mkmovie movie.mp4 "*.png"
+    ffmpeg -framerate 5 -f image2 -pattern_type glob -i "$2"  -vcodec mpeg4 -c:v libx264 -crf 20 $1
+}
+
 # Microphysics
 export MICROPHYSICS_HOME=/home/zingale/development/Microphysics
 
@@ -141,6 +147,7 @@ if [ $hostname == "ahsoka.astro.sunysb.edu" ]; then
     # HYPRE
     export HYPRE_DIR=/opt/hypre/
     source /opt/rh/gcc-toolset-15/enable
+    export PATH=/opt/emacs-30.2/bin/:${PATH}
 fi
 
 
@@ -159,6 +166,11 @@ fi
 # MESA
 if [ -d ~/development/mesa-25.12.1 ]; then
     export MESA_DIR=~/development/mesa-25.12.1
+    export PATH=$PATH:$MESA_DIR/scripts/shmesa
+fi
+
+if [ -d ~/development/mesa-26.04.1 ]; then
+    export MESA_DIR=~/development/mesa-26.04.1
     export PATH=$PATH:$MESA_DIR/scripts/shmesa
 fi
 
