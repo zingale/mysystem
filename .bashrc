@@ -166,16 +166,12 @@ fi
 # MESA
 if [ -d ~/development/mesa ]; then
     export MESA_DIR=~/development/mesa
-    export PATH=$PATH:$MESA_DIR/scripts/shmesa
 elif [ -d ~/development/mesa-25.12.1 ]; then
     export MESA_DIR=~/development/mesa-25.12.1
-    export PATH=$PATH:$MESA_DIR/scripts/shmesa
-fi
-
-if [ -d ~/development/mesa-26.04.1 ]; then
+elif [ -d ~/development/mesa-26.04.1 ]; then
     export MESA_DIR=~/development/mesa-26.04.1
-    export PATH=$PATH:$MESA_DIR/scripts/shmesa
 fi
+export PATH=$PATH:$MESA_DIR/scripts/shmesa
 
 # texlive custom install
 
