@@ -2,12 +2,12 @@
 
 ;; Copyright (C)
 ;;   2010-2013 Jeremy Rayman
-;;   2013-2019 Fanael Linithien
+;;   2013-2021 Fanael Linithien
 ;; Author: Jeremy Rayman <opensource@jeremyrayman.com>
 ;;         Fanael Linithien <fanael4@gmail.com>
 ;; Maintainer: Fanael Linithien <fanael4@gmail.com>
 ;; Created: 2010-09-02
-;; Version: 2.1.4
+;; Version: 2.1.5
 ;; Keywords: faces, convenience, lisp, tools
 ;; Homepage: https://github.com/Fanael/rainbow-delimiters
 
@@ -231,6 +231,10 @@ Returns t if char at loc meets one of the following conditions:
   "Highlight delimiters in region between point and END.
 
 Used by font-lock for dynamic highlighting."
+  (when (bound-and-true-p mmm-current-submode)
+    ;; `mmm-mode' is weird and apparently needs this hack, because otherwise we
+    ;; may end up thinking matched parentheses are mismatched.
+    (widen))
   (let* ((last-ppss-pos (point))
          (ppss (syntax-ppss)))
     (while (> end (progn (skip-syntax-forward "^()" end)
@@ -266,7 +270,9 @@ Used by font-lock for dynamic highlighting."
 ;;;###autoload
 (define-minor-mode rainbow-delimiters-mode
   "Highlight nested parentheses, brackets, and braces according to their depth."
-  nil "" nil ; No modeline lighter - it's already obvious when the mode is on.
+  :init-value nil
+  :lighter "" ; No modeline lighter - it's already obvious when the mode is on.
+  :keymap nil
   (font-lock-remove-keywords nil rainbow-delimiters--font-lock-keywords)
   (when rainbow-delimiters-mode
     (font-lock-add-keywords nil rainbow-delimiters--font-lock-keywords 'append)
