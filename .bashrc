@@ -178,3 +178,9 @@ export PATH=$PATH:$MESA_DIR/scripts/shmesa
 if [ -d ~/texlive ]; then
     export PATH=/home/zingale/texlive/2025/bin/x86_64-linux:$PATH
 fi
+
+# NPM
+
+if [ -d ~/.npm-global ]; then
+    export PATH=$PATH:~/.npm-global/bin
+fi
