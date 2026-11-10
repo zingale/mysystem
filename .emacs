@@ -3,6 +3,10 @@
 (setq warning-suppress-types
       '((files missing-lexbind-cookie)))
 
+;; enable middle-click paste
+(unless (display-graphic-p)
+  (xterm-mouse-mode -1))
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
