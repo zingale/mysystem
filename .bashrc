@@ -42,13 +42,19 @@ run_notebook ()
 
 spchars ()
 {
-    echo αβγδεζηθικλμνξοπρστυφχψω ΓΔΘΛΞΠΣΦΨΩ ∂∇∫≤≥ — ←→ ×✓ ☉ ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻ °
+    echo αβγδεζηθικλμνξοπρστυφχψω ΓΔΘΛΞΠΣΦΨΩ ∂∇∫≤≥ — ←→ ×•✓ ☉ ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻ ₀₁₂₃₄₅₆₇₈₉₊₋ ᵢⱼₖ °
 }
 
 mkmovie ()
 {
     # mkmovie movie.mp4 "*.png"
     ffmpeg -framerate 15 -f image2 -pattern_type glob -i "$2"  -vcodec mpeg4 -c:v libx264 -crf 20 $1
+}
+
+mkmovie_slow ()
+{
+    # mkmovie movie.mp4 "*.png"
+    ffmpeg -framerate 5 -f image2 -pattern_type glob -i "$2"  -vcodec mpeg4 -c:v libx264 -crf 20 $1
 }
 
 # Microphysics
@@ -140,6 +146,8 @@ fi
 if [ $hostname == "ahsoka.astro.sunysb.edu" ]; then
     # HYPRE
     export HYPRE_DIR=/opt/hypre/
+    source /opt/rh/gcc-toolset-15/enable
+    export PATH=/opt/emacs-30.2/bin/:${PATH}
 fi
 
 
@@ -156,10 +164,14 @@ if [ -d ~/development/mesasdk ]; then
 fi
 
 # MESA
-if [ -d ~/development/mesa-25.12.1 ]; then
+if [ -d ~/development/mesa ]; then
+    export MESA_DIR=~/development/mesa
+elif [ -d ~/development/mesa-25.12.1 ]; then
     export MESA_DIR=~/development/mesa-25.12.1
-    export PATH=$PATH:$MESA_DIR/scripts/shmesa
+elif [ -d ~/development/mesa-26.04.1 ]; then
+    export MESA_DIR=~/development/mesa-26.04.1
 fi
+export PATH=$PATH:$MESA_DIR/scripts/shmesa
 
 # texlive custom install
 

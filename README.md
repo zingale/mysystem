@@ -1032,10 +1032,38 @@ systemctl status dnf-automatic.timer
 systemctl list-timers dnf-*
 ```
 
-# MESA
+## MESA
 
 The MESASDK needs `csh`:
 
 ```
 dnf install tcsh
+```
+
+
+## Escape key
+
+Zoom globally resets the Esc key.  Check with:
+
+```
+dconf dump / | grep -i -C 3 escape
+```
+
+if it shows:
+
+```
+name='ZMHKey55834574920'
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+binding='Escape'
+command='dbus-send --session --dest=com.zoom.HotKeyService --type=method_call /com/zoom/HotKeyListener com.zoom.HotKeyListener.keyPressed int64:65307 string:"Escape"'
+name='ZMHKey65307'
+
+[org/gnome/settings-daemon/plugins/power]
+```
+
+Then Zoom took over.  We can disable with:
+
+```
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/ binding "[]"
 ```
